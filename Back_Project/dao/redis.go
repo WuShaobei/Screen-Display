@@ -3,7 +3,6 @@ package dao
 import (
 	"context"
 	"fmt"
-	"strconv"
 
 	"github.com/go-redis/redis"
 )
@@ -41,8 +40,4 @@ func InitRedis() {
 
 	fmt.Println("open redis success")
 
-	for year := 1991; year <= 2022; year++ {
-		res := SelectSalesVolume(year)
-		RDB.Set("year:"+strconv.Itoa(res.SellingTime), res.List.ToString(), 0)
-	}
 }

@@ -2,7 +2,6 @@ package dao
 
 import (
 	"fmt"
-	"server_side/types"
 	"strings"
 	"time"
 
@@ -15,7 +14,7 @@ const (
 	passWord = "12345678"
 	ip       = "localhost"
 	port     = "3306"
-	dbName   = "project_9_20"
+	dbName   = "Final_Project"
 )
 
 var DB *gorm.DB
@@ -23,13 +22,14 @@ var DB *gorm.DB
 func ConnectDb() {
 	dsn := strings.Join([]string{userName, ":", passWord, "@tcp(", ip, ":", port, ")/", dbName, "?charset=utf8mb4&parseTime=True"}, "")
 
+	fmt.Println("Connecting " + dbName)
 	var err error
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		PrepareStmt: true,
 	})
 
 	if err != nil {
-		fmt.Println("open database fail")
+		fmt.Println("Open Database Fail")
 		return
 	}
 	sqlDb, _ := DB.DB()
@@ -40,7 +40,7 @@ func ConnectDb() {
 	sqlDb.SetMaxOpenConns(100)
 	// 连接复用连接时间
 	sqlDb.SetConnMaxLifetime(time.Hour)
-	fmt.Println("connect success")
+	fmt.Println("Mysql Connect Success")
 }
 
 /**
@@ -48,12 +48,12 @@ func ConnectDb() {
  *
  */
 
-func InitSalesVolumeTable() {
-	if err := DB.Exec("DROP TABLE sales_volumes"); err != nil {
-		fmt.Println(err)
-	}
-	if err := DB.AutoMigrate(&types.SalesVolume{}); err != nil {
-		return
-	}
-	fmt.Println("create table success")
-}
+//func InitSalesVolumeTable() {
+//	if err := DB.Exec("DROP TABLE sales_volumes"); err != nil {
+//		fmt.Println(err)
+//	}
+//	if err := DB.AutoMigrate(&types.SalesVolume{}); err != nil {
+//		return
+//	}
+//	fmt.Println("create table success")
+//}
