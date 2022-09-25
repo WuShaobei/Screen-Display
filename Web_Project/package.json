@@ -10,9 +10,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "echarts": "^5.3.3",
     "js-cookie": "^3.0.1",
     "vue": "^2.5.2",
     "vue-cookies": "^1.8.1",
+    "vue-echarts": "^6.2.3",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
