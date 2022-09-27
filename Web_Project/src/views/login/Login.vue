@@ -9,7 +9,7 @@
             <div class="content">
             
                 <div class="leftView">
-                    <div v-if="todo==='tips'" class="leftValue">
+                    <div v-if="todo==='login'" class="leftValue">
                         <div class="box1">
                             <div class="tableBox1"><div class="text">Id</div></div>
                             <div class="tableBox2"><div class="text">用户名</div></div>
@@ -41,12 +41,46 @@
                             <div class="tableBox4"><div class="text">游客</div></div>
                         </div>
                     </div>  
-                    <!-- TODO 注册 -->
-          
                 </div>
 
                 <div class="rightView">
-                    <div class="rightValue">
+                    <div v-if="todo==='register'" class="rightValue">
+                        <div class="box1">
+                            <div class="text">
+                                {{
+                                    registerMsg ? registerMsg : "注册页"
+                                }}
+                            </div>
+                        </div>
+                        <div class="box2">
+                            <div class="leftBox"><div class="text">用户名:</div></div>
+                            <div class="rightBox"><div class="text">
+                                <input v-model="Username" placeholder="请输入用户名" id="input" /> 
+                            </div></div>
+                        </div>
+                        <div class="box3">
+                            <div class="leftBox"><div class="text">密码</div></div>
+                            <div class="rightBox"><div class="text">
+                                <input v-model="Password" type="text" placeholder="请输入密码" id="input"/>
+                            </div></div>
+                        </div>
+                        <div class="box4">
+                            <div class="leftBox"><div class="text">真实姓名</div></div>
+                            <div class="rightBox"><div class="text">
+                                <input v-model="RealName" type="text" placeholder="请输入真实姓名" id="input"/>
+                            </div></div>
+                        </div>
+                        <div class="box5">
+                            <div class="leftBox"><div class="text">
+                                <button @click="toLogin()" id="button">登录</button>
+                            </div></div>
+                            <div class="rightBox"><div class="text">
+                                <button @click="register()" id="button">注册</button>
+                            </div></div>
+                        
+                        </div>
+                    </div>
+                    <div v-else class="rightValue">
                         <div class="box1">
                             <div class="text">
                                 {{
@@ -69,21 +103,19 @@
                         <div class="box4">
                             <div class="leftBox"><div class="text"></div></div>
                             <div class="rightBox"><div class="text">
-                                <input type="radio" v-model="setCookie" value="true" id="true"/> 30天免登录
+                                <input type="radio" v-model="setCookie" value="true" id="true"/> 3天免登录
                             </div></div>
                         </div>
                         <div class="box5">
 
                             <div class="leftBox"><div class="text">
-                                <!-- TODO 注册 -->
-                                <button v-if="todo==='tips'"  @click="toClose()" id="button">关闭提示</button>
-                                <button v-else @click="toTips()" id="button">查看提示</button>
+                                <button  @click="toRegister()" id="button">注册账号</button>
                             </div></div>
-                            
+
                             <div class="rightBox"><div class="text">
                                 <button @click="login()" id="button">登录</button>
                             </div></div>
-                       
+                    
                         </div>
 
                     </div>
@@ -94,14 +126,14 @@
 
             <div class="indexes">
                 <div class="text">
-                    <h1 id="h1">
+                    <h3 id="h1">
                         中<br />
                         国<br />
-                        餐<br />
-                        饮<br />
+                        火<br />
+                        锅<br />
                         市<br />
                         场
-                    </h1>
+                    </h3>
                 </div>
             </div>
         
@@ -121,84 +153,113 @@
         data(){
             return{
                 // 背景
-                imgSrcBK:require('../../assets/login/login/background.jpeg'),
-                msg:"",
-                todo:"tips",
+                imgSrcBK:require('../../assets/background.jpeg'),
+                msg:"登录页",
+                registerMsg:"",
+                todo:"login",
                 setCookie: "",
                 SessionKey: "",
                 Username: "",
                 Password: "",
                 RealName:"",
-                Identity:"",
+                Identity:"3",
+                Id:"",
             }
         },
         methods:{
-            toClose(){
+            toRegister(){
                 this.todo = "register"
+                this.Username = "",
+                this.Password = "",
+                this.RealName = ""
             },
-            toTips(){
-                this.todo = "tips"
-            },login(){
-                 if ( !this.userName || !this.password) {
+            // toTips(){
+                //     this.todo = "tips"
+                // },
+            toLogin(){
+                this.todo = "login"
+                this.Username = "",
+                this.Password = "",
+                this.RealName = ""
+            },
+            login(){
+                if ( this.Username=="" || this.Password=="") {
                     this.msg = "请输入用户名或密码"
-                } 
+                } else {
+                    let that = this
+    
+                    axios.post(
+                        "http://127.0.0.1:1432/api/v1/loginByPassword?",{                        
+                            Username : this.Username, 
+                            Password : this.Password,
+                        }
+                    ).then(function(res){
+                        if (res.data.Code == 0 ){
+                            that.Id = res.data.Data.Id
+                            
+                            if (that.setCookie == 'true'){
+                                that.$cookies.set("camp-session", res.data.Data.Session)                  
+                            }
+                            that.jumpTo()
+                        } else {
+                            that.msg = "账号或密码错误"
+                        }
+                    }).catch(function(err){
+                        console.log(err)
+                    })
+                }
+            },
+            register(){
                 let that = this
-
                 axios.post(
-                    "http://127.0.0.1:1432/api/v1/login?",{                        
-                        Username : this.Username, 
-                        Password : this.Password,
+                    "http://127.0.0.1:1432/api/v1/create",{
+                        Username: this.Username,
+                        Password: this.Password,
+                        Identity: this.Identity,
+                        RealName :this.RealName
                     }
                 ).then(function(res){
+                    console.log(res)
                     if (res.data.Code == 0 ){
-                        console.log(res)
-                        if (that.setCookie == 'true'){
-                            that.$cookies.set("camp-session", res.data.Session)                  
-                        }
-                        that.Username = res.data.Data.Username
-                        that.RealName = res.data.Data.RealName
-                        that.Identity = res.data.Data.Identity
-                        that.jumpTo()
+                        that.registerMsg = "注册成功"
+                        that.todo = "login"
+                    
                     } else {
-                        that.msg = "账号或密码错误"
+                        that.registerMsg = "用户已存在"
                     }
                 }).catch(function(err){
                     console.log(err)
                 })
             },
             jumpTo(){
-
-                console.log("Jump TO")
+                let that = this
                 this.$router.push({
-                    path: `/data/data`,
+                    path: `/data/Screen`,
                     query: {
-                        Username: this.Username,
-                        RealName: this.RealName,
-                        Identity: this.Identity
+                        Id: that.Id
                     },
                 })
             }
         },
         mounted() {
             let that = this
+            that.msg = that.$route.query.msg
             let SessionKey = this.$cookies.get("camp-session")
-            console.log(SessionKey)
-            axios.post(
-                "http://127.0.0.1:1432/api/v1/login?",{                        
-                    SessionKey: SessionKey
-                }
-            ).then(function(res){
-                if (res.data.Code == 0 ){
-                    that.Username = res.data.Data.Username
-                    that.RealName = res.data.Data.RealName
-                    that.Identity = res.data.Data.Identity
-                    that.jumpTo()
-                } else {
-                    that.msg = ""
-                }
-            }).catch(function(err){
-                console.log(err)
-            })
+            if (SessionKey) {
+                axios.post(
+                    "http://127.0.0.1:1432/api/v1/loginBySession?",{                        
+                        SessionKey: SessionKey
+                    }
+                ).then(function(res){
+                    if (res.data.Code == 0 ){
+                        that.jumpTo()
+                    } else {
+                        
+                    }
+                }).catch(function(err){
+                    console.log(err)
+                })
+            }
         }
         
     }
@@ -231,7 +292,7 @@
 
         .content{
             height:100%; 
-            width:80%;
+            width:95%;
             display: flex;
             position: absolute;     
         }
@@ -252,6 +313,7 @@
                     top:20%;
                     display: flex;    
                     flex-direction: column;
+                    background-color: aliceblue;
                     position: absolute
                 }
 
@@ -270,14 +332,15 @@
                     left: 0%;
                     top:20%;
                     display: flex;    
+                    background-color: aliceblue;
                     position: absolute;
                 }
         .indexes{
             height:100%;
-            width:20%;
+            width:5%;
             display: flex;
             position: absolute;
-            left: 80%;
+            left: 95%;
             background-color: rgb(124, 94, 16);
             text-align: center;
         }
@@ -289,7 +352,6 @@
     top:0%;
     position: absolute;
     display: flex;
-    background-color: aqua;
     text-align: center;
 }
 .box2{
@@ -298,7 +360,6 @@
     top:20%;
     position: absolute;
     display: flex;
-    background-color: aqua;
 }
 .box3{
     height: 20%;
@@ -306,7 +367,6 @@
     top:40%;
     position: absolute;
     display: flex;
-    background-color: aqua;
 }
 .box4{
     height: 20%;
@@ -314,7 +374,6 @@
     top:60%;
     position: absolute;
     display: flex;
-    background-color: aqua;
 }
 .box5{
     height: 20%;
@@ -322,7 +381,6 @@
     top:80%;
     position: absolute;
     display: flex;
-    background-color: aqua;
 }
 .tableBox1{
     height: 100%;
@@ -363,12 +421,11 @@
 
 /* text */
 .text{
-    height: 100%;
+    height:100%;
     width: 100%;
     position: absolute;
     line-height: 100px; 
     text-align: center;  
-    background-color: aquamarine;
 }
 
  #input{
