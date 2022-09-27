@@ -1,20 +1,31 @@
 <template>
     <div class="AllDataView">
+        
+        <!-- BackGround -->
         <div class="background">
             <img :src="imgSrcBK" height="100%" width="100%"/>
         </div>
 
+        <!-- APi Title -->
         <div class="dataView">
         
+            <!-- Api -->
             <div class="content">
-            
+                
+                <!-- Api4 -->
                 <div class="leftView">
-                    <e-charts :option="opApi4"/>
+                    <e-charts :option="Api4Op"/>
                 </div>
+                
+                <!-- Api1 & Api5 -->
                 <div class="centerView">
+                    
+                    <!-- Api1 -->
                     <div class="top1">
-                        <e-charts :option="opApi1"/>
+                        <e-charts :option="Api1Op"/>
                     </div>
+                    
+                    <!-- Api5 -->
                     <div class="down1">
                         <div id="scroll_in2" class="htp-list_scroll_in" style="height: 100%;overflow-y:hidden;font-size:20px;">
                             
@@ -50,29 +61,34 @@
 
                         </div>
                     </div>
+                
                 </div>
+
+                <!-- ApiUser & Api3 & Api2 -->
                 <div class="rightView">
-                    <div class="top0">
-                        
+
+                    <!-- ApiUser -->
+                    <div class="top0">    
                         <div class="table0Box1">
                             <div class="text0">
                                 <h3>
-                                    欢迎{{getIdentity()}} {{RealName}}
+                                    欢迎{{getIdentity()}} {{whoAmI.RealName}}
                                 </h3>
                             </div>
                         </div>
                         <div class="table0Box2">
                             <div class="text0">
-                                Id : {{Id}}
+                                Id : {{whoAmI.Id}}
                                 </div>
                         </div>
                         <div class="table0Box3">
                             <div class="text0">
-                                用户名 : {{Username}}
+                                用户名 : {{whoAmI.Username}}
                             </div>
                         </div>
                     </div>
 
+                    <!-- Api3 -->
                     <div class="top2">
                         <div class="table1" style="font-size:20px;">
                             <div class="table1Box" >
@@ -91,29 +107,32 @@
                         </div>
                         
                     </div>
+
+                    <!-- Api2 -->
                     <div class="down2">    
-                        <e-charts :option="opApi2"/>
+                        <e-charts :option="Api2Op"/>
                     </div>
+
                 </div>
                     
             </div>
 
+            <!-- Title -->
+            <div class="Title">
 
-            <div class="indexes">
                 <div class="text">
-                    <h3>
 
-                        火<br />
-                        锅<br />
+                    <h3>
+                        中<br />
+                        国<br />
+                        餐<br />
+                        饮<br />
                         数<br />
                         据<br />
-                        大<br />
-                        屏<br />
-                        页
                         
-                        <div class="text">
-                            <button @click="logout">注销</button>
-                        </div>
+                        
+                        <button @click="logout">注销</button>
+                        
                     </h3>
                 </div>
                 
@@ -128,7 +147,12 @@
 <script>
     
     import axios from 'axios'
-    
+    import * as ApiUser from '../../Web/ApiUser'
+    import {getApi1Data} from '../../Web/Api1'
+    import {getApi2Data} from '../../Web/Api2'
+    import {getApi3Data} from '../../Web/Api3'
+    import {getApi4Data} from '../../Web/Api4'
+    import {getApi5Data} from '../../Web/Api5'
     export default{
         name: "login",
 
@@ -136,277 +160,53 @@
             return{
                 // 背景
                 imgSrcBK:require('../../assets/background.jpeg'),
-                rightValue:{},
-                showLeftValue: false,
+                Api1Op : {},
+                Api2Op : {},
                 Api3Value:{},
+                Api4Op : {},
                 Api5Value:{},
-                opApi1 : {},
-                opApi2 : {},
-                opApi4 : {},
-                Username: "",
-                RealName:"",
-                Identity:"",
-                Id:""
+                whoAmI:{},
             }
         },
         methods:{
             getIdentity(){
-                if (this.Identity == '0') { return "管理员"}
-                if (this.Identity == '1') { return "投资方"}
-                if (this.Identity == '2') { return "从业者"}
-                if (this.Identity == '3') { return "游客"}
+                if (this.whoAmI.Identity == '0') { return "管理员"}
+                if (this.whoAmI.Identity == '1') { return "投资方"}
+                if (this.whoAmI.Identity == '2') { return "从业者"}
+                if (this.whoAmI.Identity == '3') { return "游客"}
             },
             logout(){
                 this.$cookies.set("camp-session", "", -1)
                 
                 this.$router.push({
-                    path: `/`,
-                    query: {
-                        msg: "注销成功"
-                    },
+                    path: `/`
                 })
                 
             },
             Api1(){
-                let that = this
-            
-                axios.post(
-                    "http://127.0.0.1:1432/api/v1/api1?BeginYear=2014&EndYear=2021"
-                ).then(function(res){
-                    
-                    if (res.data.Code == 0){
-                        let colors = ['#559955', '#FF9900'];
-                        
-                        let xData = [];
-                        let yData1 = [];
-                        let yData2 = [];
-                        
-                        for(let i = 0; i <= 2021 - 2014; i ++) {
-                            xData.push(res.data.Data[i].Year)
-                            yData1.push(res.data.Data[i].TotalAmount)
-                            yData2.push(res.data.Data[i].TotalAmountPercentage)
-                        }
-                        
-                        that.opApi1 = {
-                            title : {
-                                text:"2014年-2021年中国餐饮市场规模"
-                            },
-                            color: colors,
-                            tooltip: {
-                                trigger: 'axis',
-                                axisPointer: {
-                                type: 'cross'
-                                }
-                            },
-                            grid: {
-                                right: '25%'
-                            },
-                            xAxis: [
-                                {
-                                type: 'category',
-                                axisTick: {
-                                    alignWithLabel: true
-                                },
-                                // prettier-ignore
-                                // data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                                    data: xData
-                                }
-                            ],
-                            yAxis: [
-                                {
-                                type: 'value',
-                                name: '市场份额(万亿)',
-                                position: 'right',
-                                alignTicks: true,
-                                offset: 80,
-                                axisLine: {
-                                    show: true,
-                                    lineStyle: {
-                                    color: colors[0]
-                                    }
-                                },
-                                axisLabel: {
-                                    formatter: '{value} 万亿'
-                                }
-                                },
-                                {
-                                type: 'value',
-                                name: '百分比',
-                                position: 'left',
-                                alignTicks: true,
-                                axisLine: {
-                                    show: true,
-                                    lineStyle: {
-                                    color: colors[1]
-                                    }
-                                },
-                                axisLabel: {
-                                    formatter: '{value} %'
-                                }
-                                }
-                            ],
-                            series: [
-                                {
-                                name: '市场份额(万亿)',
-                                type: 'bar',
-                                yAxisIndex: 0,
-                                // data: [
-                                //     2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
-                                // ]
-                                data : yData1
-                                },
-                                {
-                                name: '百分比',
-                                type: 'line',
-                                yAxisIndex: 1,
-                                // data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-                                data: yData2
-                                }
-                            ]
-                        };
-                    }
-                }).catch(function(err){
-                    console.log(err)
+                getApi1Data((res) =>{
+                    this.Api1Op = res.Data
                 })
-                
-                
             },
             Api2(){
-                let that = this
-                axios.post(
-                    "http://127.0.0.1:1432/api/v1/api2?BeginYear=2010&EndYear=2021"
-                ).then( function(res){
-                    if (res.data.Code == 0){
-                        that.opApi2 = {
-                            title:{
-                                text:"2010年-2021年中国餐饮线上订单走势",
-                            },
-                            xAxis: {
-                                type: 'category',
-                                data: res.data.AllTime
-                            },
-                            yAxis: {
-                                type: 'value'
-                            },
-                            series: [
-                                {
-                                    data: res.data.AllOrderAmount,
-                                    type: 'line',
-                                    smooth: true,
-                                    color:'#5555AA',
-                                }
-                            ]
-                        };
-                    }
-                }).catch(function(err){
-                    console.log(err)
+                getApi2Data((res) =>{
+                    this.Api2Op = res.Data
                 })
             },
             Api3(){
-                let that = this
-                axios.post(
-                    // TODO 范围查询
-                    "http://127.0.0.1:1432/api/v1/api3?BeginYear=2018&EndYear=2021"
-                ).then(function(res){
-                    if (res.data.Code == 0) {
-                        that.Api3Value = res.data.Data
-                        that.showLeftValue = true
-                    }
+                getApi3Data((res) =>{
+                    this.Api3Value = res.Data
                 })
             },
             Api4(){
-                let that = this
-                axios.post(
-                    "http://127.0.0.1:1432/api/v1/api4"
-                ).then( function(res) {
-                    if (res.data.Code == 0) {
-                        that.opApi4 = {
-                            title: {
-                                text: '中国火锅品牌梯队分布',
-                            },
-                            series: [
-                                {
-                                type: 'funnel',
-                                min: 0,
-                                max: 100,
-                                minSize: '0%',
-                                maxSize: '100%',
-                                sort: 'ascending',
-                                gap: 2,
-                                label: {
-                                    show: true,
-                                    position: 'inside',
-                                    color: '#555555',
-                                    fontSize:12.5,
-                                },
-                                labelLine: {
-                                    length: 10,
-                                    lineStyle: {
-                                    width: 1,
-                                    type: 'solid'
-                                    }
-                                },
-                                itemStyle: {
-                                    borderColor: '#FF9900',
-                                    borderWidth: 5
-                                },
-                                emphasis: {
-                                    label: {
-                                    fontSize: 20
-                                    }
-                                },
-                                data: [
-                                    { 
-                                        value: 20, 
-                                        name: res.data.Data[0],
-                                        itemStyle: {
-                                            color: "#FF9900",
-                                            borderColor: "none",
-                                        },
-                                    },
-                                    { 
-                                        value: 40, 
-                                        name: res.data.Data[1],
-                                        itemStyle: {
-                                            color: "#FF7700",
-                                            borderColor: "none",
-                                        },
-                                    },
-                                    { 
-                                        value: 60,
-                                        name: res.data.Data[2],
-                                        itemStyle: {
-                                            color: "#FF5500",
-                                            borderColor: "none",
-                                        },
-                                    },
-                                    {
-                                        value: 80,
-                                        name: res.data.Data[3],
-                                        itemStyle: {
-                                            color: "#FF3300",
-                                            borderColor: "none",
-                                        },
-                                     }
-                                ]
-                                }
-                            ]
-                            };
-                    }
-                }).catch(function(err){
-                    console.log(err)
+                getApi4Data((res) =>{
+                    this.Api4Op = res.Data
                 })
+                
             },
             Api5(){
-                let that = this
-                axios.post(
-                    "http://127.0.0.1:1432/api/v1/api5"
-                ).then(function(res){
-                    if ( res.data.Code == 0 ) {
-                        that.Api5Value = res.data.Data
-                    }
-                }).catch(function(err){
-                    console.log(err)
+                getApi5Data((res) =>{
+                    this.Api5Value = res.Data
                 })
             },    // 添加自动滚动
             /* 
@@ -453,7 +253,9 @@
                 },    
         },
         mounted(){
-            this.Id = this.$route.query.Id 
+            ApiUser.getWhoAmIData(this.$route.query.Id , (res)=>{
+                this.whoAmI = res.Data
+            })
             this.Api1()
             this.Api2()
             this.Api3()
@@ -547,7 +349,7 @@
                 background-color: azure;
             }
 
-        .indexes{
+        .Title{
             height:100%;
             width:5%;
             top: 0%;

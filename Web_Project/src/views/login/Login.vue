@@ -48,7 +48,7 @@
                         <div class="box1">
                             <div class="text">
                                 {{
-                                    registerMsg ? registerMsg : "注册页"
+                                    "注册页"
                                 }}
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         <div class="box1">
                             <div class="text">
                                 {{
-                                    msg ? msg : "登录页"
+                                    "登录页"
                                 }}
                             </div>
                         </div>
@@ -124,13 +124,13 @@
             </div>
 
 
-            <div class="indexes">
+            <div class="Title">
                 <div class="text">
                     <h3 id="h1">
                         中<br />
                         国<br />
-                        火<br />
-                        锅<br />
+                        餐<br />
+                        饮<br />
                         市<br />
                         场
                     </h3>
@@ -154,8 +154,6 @@
             return{
                 // 背景
                 imgSrcBK:require('../../assets/background.jpeg'),
-                msg:"登录页",
-                registerMsg:"",
                 todo:"login",
                 setCookie: "",
                 SessionKey: "",
@@ -173,9 +171,6 @@
                 this.Password = "",
                 this.RealName = ""
             },
-            // toTips(){
-                //     this.todo = "tips"
-                // },
             toLogin(){
                 this.todo = "login"
                 this.Username = "",
@@ -184,10 +179,9 @@
             },
             login(){
                 if ( this.Username=="" || this.Password=="") {
-                    this.msg = "请输入用户名或密码"
+                    alert("请输入用户名或密码")
                 } else {
                     let that = this
-    
                     axios.post(
                         "http://127.0.0.1:1432/api/v1/loginByPassword?",{                        
                             Username : this.Username, 
@@ -195,14 +189,13 @@
                         }
                     ).then(function(res){
                         if (res.data.Code == 0 ){
-                            that.Id = res.data.Data.Id
-                            
+                            that.Id = res.data.Data.Id               
                             if (that.setCookie == 'true'){
                                 that.$cookies.set("camp-session", res.data.Data.Session)                  
                             }
                             that.jumpTo()
                         } else {
-                            that.msg = "账号或密码错误"
+                            alert("账号或密码错误")
                         }
                     }).catch(function(err){
                         console.log(err)
@@ -210,6 +203,10 @@
                 }
             },
             register(){
+                if ( this.Username=="" || this.Password=="" || this.RealName=="") {
+                    alert("请输入完整信息")
+                    return
+                }
                 let that = this
                 axios.post(
                     "http://127.0.0.1:1432/api/v1/create",{
@@ -219,13 +216,11 @@
                         RealName :this.RealName
                     }
                 ).then(function(res){
-                    console.log(res)
                     if (res.data.Code == 0 ){
-                        that.registerMsg = "注册成功"
-                        that.todo = "login"
-                    
+                        alert("注册成功")
+                        that.todo = "login"        
                     } else {
-                        that.registerMsg = "用户已存在"
+                        alert("用户已存在")
                     }
                 }).catch(function(err){
                     console.log(err)
@@ -242,8 +237,8 @@
             }
         },
         mounted() {
+            // 免登录
             let that = this
-            that.msg = that.$route.query.msg
             let SessionKey = this.$cookies.get("camp-session")
             if (SessionKey) {
                 axios.post(
@@ -252,6 +247,7 @@
                     }
                 ).then(function(res){
                     if (res.data.Code == 0 ){
+                        that.Id = res.data.Data.Id
                         that.jumpTo()
                     } else {
                         
@@ -335,7 +331,7 @@
                     background-color: aliceblue;
                     position: absolute;
                 }
-        .indexes{
+        .Title{
             height:100%;
             width:5%;
             display: flex;
