@@ -12,7 +12,7 @@ func GetChineseCateringOnlineOrderStatistic(year, month int) types.Api2Data {
 
 	sqlStr := `
 		SELECT order_amount AS OrderAmount
-		From chinese_catering_funding_statistics
+		From chinese_catering_online_order_statistics
 		WHERE year = ? AND month = ?
 	`
 	dao.DB.Raw(sqlStr, year, month).Scan(&sqlData)

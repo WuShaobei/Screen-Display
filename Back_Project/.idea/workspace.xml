@@ -5,29 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4eac7947-a998-415a-b21f-c397df65c4ef" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/dao/select.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manager/Test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/Test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/users/Create.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/users/Login.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/users/Logout.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/SqlClass.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/Users.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manager/ApiUserChineseCateringUser.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 12.55.23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 15.25.04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 15.31.21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 15.33.53.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/mysql.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/redis.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/redis.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/Api2GetChineseCateringOnlineOrderStatistic.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager/Api2GetChineseCateringOnlineOrderStatistic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/Api5GetChineseCateringFundingStatistic.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager/Api5GetChineseCateringFundingStatistic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/ApiUser.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/java/com/example/javaProject/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java_Project/src/main/java/com/example/javaProject/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Api1.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Api2.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api2.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Api3.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api3.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Api4.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api4.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Api5.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api5.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/ApiUsers/Create.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/Create.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/ApiUsers/LoginByPassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/LoginByPassword.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/ApiUsers/LoginBySession.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/LoginBySession.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/ApiUsers/WhoAmI.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/WhoAmI.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/Api1.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/Api2.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api2.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/Api3.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api3.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/Api4.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api4.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/Api5.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api5.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/AqiUsers.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/AqiUsers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/java/com/example/javaProject/JavaProjectApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/java/com/example/javaProject/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Project/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/config/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/assets/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Web_Project/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Web_Project/src/views/data/Screen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/views/data/Screen.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Web_Project/src/views/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/views/login/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../entity.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture/entity.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +69,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2F9zecEeyH5soEivxFh1xbt371D" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -68,21 +93,28 @@
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/wushaobei/Desktop/Final_Project/Back_Project/service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/wushaobei/Desktop/Final_Project/Back_Project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/service" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/service" />
     </key>
   </component>
   <component name="RunManager">
@@ -102,6 +134,17 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="4eac7947-a998-415a-b21f-c397df65c4ef" name="变更" comment="" />
+      <created>1664243320402</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664243320402</updated>
+      <workItem from="1664243321896" duration="6000" />
+    </task>
+    <servers />
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>

@@ -1,6 +1,8 @@
 package dao
 
 import (
+	"Back_Project/types"
+	"crypto/md5"
 	"fmt"
 	"strings"
 	"time"
@@ -48,12 +50,46 @@ func ConnectDb() {
  *
  */
 
-//func InitSalesVolumeTable() {
-//	if err := DB.Exec("DROP TABLE sales_volumes"); err != nil {
-//		fmt.Println(err)
-//	}
-//	if err := DB.AutoMigrate(&types.SalesVolume{}); err != nil {
-//		return
-//	}
-//	fmt.Println("create table success")
-//}
+// MD5
+// 密码加密
+func MD5(str string) string {
+	data := []byte(str) //切片
+	has := md5.Sum(data)
+	md5str := fmt.Sprintf("%x", has) //将[]byte转成16进制
+	return md5str
+}
+
+func InitUserTable() {
+	// 删除 user
+	if err := DB.Exec("DROP TABLE chinese_catering_users"); err != nil {
+		fmt.Println(err)
+	}
+	if err := DB.AutoMigrate(&types.ChineseCateringUser{}); err != nil {
+		return
+	}
+	DB.Create(&types.ChineseCateringUser{
+		Username: "LocalHost",
+		Password: MD5("127.0.0.1"),
+		RealName: "Admin",
+		Identity: types.Admin,
+	})
+	DB.Create(&types.ChineseCateringUser{
+		Username: "Investor",
+		Password: MD5("Investor"),
+		RealName: "Investor",
+		Identity: types.Investor,
+	})
+	DB.Create(&types.ChineseCateringUser{
+		Username: "Practitioner",
+		Password: MD5("Practitioner"),
+		RealName: "Practitioner",
+		Identity: types.Practitioner,
+	})
+	DB.Create(&types.ChineseCateringUser{
+		Username: "Tourist",
+		Password: MD5("Tourist"),
+		RealName: "Tourist",
+		Identity: types.Tourist,
+	})
+	fmt.Println("create table success")
+}
