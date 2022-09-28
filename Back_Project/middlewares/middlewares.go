@@ -7,9 +7,11 @@ import (
 )
 
 // Cors
-/**
- * 允许跨域访问
- */
+//
+//	@Description: 允许跨域访问
+//	@return gin.HandlerFunc
+//	@data 2022-09-28 13:55:07
+//	@author WuShaobei
 func Cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method

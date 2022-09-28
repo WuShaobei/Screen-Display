@@ -7,6 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// RegisterRouter
+//
+//	@Description: 路由设置
+//	@param r
+//	@data 2022-09-28 13:55:22
+//	@author WuShaobei
 func RegisterRouter(r *gin.Engine) {
 	g := r.Group("api/v1")
 
@@ -18,11 +24,11 @@ func RegisterRouter(r *gin.Engine) {
 
 	g.POST("/loginByPassword", users.LoginByPassword)
 	g.POST("/loginBySession", users.LoginBySession)
-	g.POST("/create", users.CreateMember)
+	g.POST("/create", users.Register)
 	g.POST("/whoAmI", users.WhoAmI)
-	g.POST("/api1", service.Api1)
-	g.POST("/api2", service.Api2)
-	g.POST("/api3", service.Api3)
-	g.POST("/api4", service.Api4)
-	g.POST("/api5", service.Api5)
+	g.POST("/select/ChineseCateringStatistic", service.SelectChineseCateringStatistic)
+	g.POST("/select/ChineseCateringOnlineOrderStatistic", service.SelectChineseCateringOnlineOrderStatistic)
+	g.POST("/select/ChineseCateringPayment", service.SelectChineseCateringPayment)
+	g.POST("/select/ChineseCateringBrandStatistic", service.SelectChineseCateringBrandStatistic)
+	g.POST("/select/ChineseCateringFundingStatistic", service.SelectChineseCateringFundingStatistic)
 }

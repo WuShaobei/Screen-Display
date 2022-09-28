@@ -12,7 +12,7 @@ func main() {
 
 	//Sql
 	dao.ConnectDb()
-	// 重置 User表
+	// TODO 判断是否要重置数据表
 	dao.InitTables()
 
 	// Redis

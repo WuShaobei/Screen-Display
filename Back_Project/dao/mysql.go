@@ -13,6 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// 数据库连接数据
 const (
 	userName = "root"
 	passWord = "12345678"
@@ -21,8 +22,14 @@ const (
 	dbName   = "test"
 )
 
+// DB 全局数据库操作变量
 var DB *gorm.DB
 
+// ConnectDb
+//
+//	@Description: 连接数据库
+//	@data 2022-09-28 13:37:10
+//	@author WuShaobei
 func ConnectDb() {
 	dsn := strings.Join([]string{userName, ":", passWord, "@tcp(", ip, ":", port, ")/", dbName, "?charset=utf8mb4&parseTime=True"}, "")
 
@@ -47,14 +54,11 @@ func ConnectDb() {
 	fmt.Println("Mysql Connect Success")
 }
 
-/**
- * 创建销售表
- *
- */
-
-// MD5
-// 密码加密
-
+// InitTables
+//
+//	@Description: 初始表数据表
+//	@data 2022-09-28 13:37:46
+//	@author WuShaobei
 func InitTables() {
 	// 删除 数据表
 	if err := DB.Exec("DROP TABLE chinese_catering_statistics"); err != nil {
@@ -106,10 +110,25 @@ func InitTables() {
 	fmt.Println("create table success")
 }
 
+// Decimal
+//
+//	@Description: 四舍五入后保留两位小数
+//	@param value
+//	@return float64
+//	@data 2022-09-28 13:38:01
+//	@author WuShaobei
 func Decimal(value float64) float64 {
 	value, _ = strconv.ParseFloat(fmt.Sprintf("%.2f", value+0.005), 64)
 	return value
 }
+
+// MD5
+//
+//	@Description: 字符串转 MD5 码，完成对密码对加密
+//	@param str
+//	@return string
+//	@data 2022-09-28 13:38:34
+//	@author WuShaobei
 func MD5(str string) string {
 	data := []byte(str) //切片
 	has := md5.Sum(data)
@@ -117,16 +136,26 @@ func MD5(str string) string {
 	return md5str
 }
 
+// initChineseCateringStatistic
+//
+//	@Description: 初始化 ChineseCateringStatistic 2014年 到 2021年 的数据
+//	@data 2022-09-28 14:12:47
+//	@author WuShaobei
 func initChineseCateringStatistic() {
 	for year := 2014; year <= 2021; year++ {
 		DB.Create(&types.ChineseCateringStatistic{
 			Year:                  year,
 			TotalAmount:           Decimal(float64(rand.Intn(500)) / 10.0),
-			TotalAmountPercentage: Decimal(float64(rand.Intn(200))/10.0 - 10),
+			TotalAmountPercentage: Decimal(float64(rand.Intn(200)) / 10.0),
 		})
 	}
 }
 
+// initChineseCateringOnlineOrderStatistic
+//
+//	@Description: 初始化 ChineseCateringOnlineOrderStatistic 2010年 到 2021年 的数据
+//	@data 2022-09-28 13:39:48
+//	@author WuShaobei
 func initChineseCateringOnlineOrderStatistic() {
 	for year := 2010; year <= 2021; year++ {
 		for month := 1; month <= 12; month++ {
@@ -138,6 +167,12 @@ func initChineseCateringOnlineOrderStatistic() {
 		}
 	}
 }
+
+// initChineseCateringPayment
+//
+//	@Description: 初始化 ChineseCateringPayment 2018年 - 2021 年的数据
+//	@data 2022-09-28 13:40:23
+//	@author WuShaobei
 func initChineseCateringPayment() {
 	user := 0
 	for year := 2018; year <= 2021; year++ {
@@ -152,6 +187,11 @@ func initChineseCateringPayment() {
 	}
 }
 
+// initChineseCateringBrandStatistic
+//
+//	@Description: 初始化 ChineseCateringBrandStatistic 四个档次的数据
+//	@data 2022-09-28 13:40:59
+//	@author WuShaobei
 func initChineseCateringBrandStatistic() {
 	brand := 0
 	for num := 0; num < 5+rand.Intn(5); num++ {
@@ -183,6 +223,12 @@ func initChineseCateringBrandStatistic() {
 		})
 	}
 }
+
+// initChineseCateringFundingStatistic
+//
+//	@Description: 初始化 ChineseCateringFundingStatistic 2021年 到 2022 年的数据
+//	@data 2022-09-28 13:41:26
+//	@author WuShaobei
 func initChineseCateringFundingStatistic() {
 	for year := 2021; year <= 2022; year++ {
 		for month := 1; month <= 12; month++ {

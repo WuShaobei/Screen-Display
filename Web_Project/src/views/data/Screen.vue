@@ -6,26 +6,24 @@
             <img :src="imgSrcBK" height="100%" width="100%"/>
         </div>
 
-        <!-- APi Title -->
         <div class="dataView">
         
-            <!-- Api -->
+
             <div class="content">
-                
-                <!-- Api4 -->
+
+                <!-- ChineseCateringBrandStatisticOpData -->
                 <div class="leftView" style="overflow-y:hidden;overflow-x:hidden">
-                    <e-charts :option="Api4Op"/>
+                    <e-charts :option="ChineseCateringBrandStatisticOpData"/>
                 </div>
                 
-                <!-- Api1 & Api5 -->
                 <div class="centerView">
                     
-                    <!-- Api1 -->
+                    <!-- ChineseCateringStatisticOpData -->
                     <div class="top1" style="overflow-y:hidden;overflow-x:hidden">
-                        <e-charts :option="Api1Op"/>
+                        <e-charts :option="ChineseCateringStatisticOpData"/>
                     </div>
                     
-                    <!-- Api5 -->
+                    <!-- ChineseCateringFundingStatisticTableData -->
                     <div class="down1">
                         <div id="scroll_in2" class="htp-list_scroll_in" style="height: 100%;overflow-y:hidden;overflow-x:hidden;font-size:20px;">
                             
@@ -43,7 +41,7 @@
                                     <td> <h3> 轮次</h3> </td>
                                     <td> <h3>投资商</h3> </td>
                                 </tr>
-                                <tr v-for="data in Api5Value">
+                                <tr v-for="data in ChineseCateringFundingStatisticTableData">
                                     <td style="height: 20%;">
                                         {{data.Brand}}
                                     </td>
@@ -64,31 +62,31 @@
                 
                 </div>
 
-                <!-- ApiUser & Api3 & Api2 -->
+
                 <div class="rightView">
 
-                    <!-- ApiUser -->
+                    <!-- whoAmIData -->
                     <div class="top0" style="overflow-y:hidden;overflow-x:hidden">    
                         <div class="table0Box1">
                             <div class="text0">
                                 <h3>
-                                    欢迎{{getIdentity()}} {{whoAmI.RealName}}
+                                    欢迎{{getIdentity()}} {{whoAmIData.RealName}}
                                 </h3>
                             </div>
                         </div>
                         <div class="table0Box2">
                             <div class="text0">
-                                Id : {{whoAmI.Id}}
+                                Id : {{whoAmIData.Id}}
                                 </div>
                         </div>
                         <div class="table0Box3">
                             <div class="text0">
-                                用户名 : {{whoAmI.Username}}
+                                用户名 : {{whoAmIData.Username}}
                             </div>
                         </div>
                     </div>
 
-                    <!-- Api3 -->
+                    <!-- ChineseCateringPaymentTableData -->
                     <div class="top2" style="overflow-y:hidden;overflow-x:hidden">
                         <div class="table1" style="font-size:20px;">
                             <div class="table1Box" >
@@ -99,7 +97,7 @@
                                 <div class="table1BoxData2"><div class="text">平均报酬</div></div>
                                 <div class="table1BoxData3"><div class="text">就业人数</div></div>
                             </div>
-                            <div v-for="data in Api3Value" class="table1Box">
+                            <div v-for="data in ChineseCateringPaymentTableData" class="table1Box">
                                 <div class="table1BoxData1"><div class="text">{{data.Year}}</div></div>
                                 <div class="table1BoxData2"><div class="text">{{data.AvgSalary}}</div></div>
                                 <div class="table1BoxData3"><div class="text">{{data.CountSalary}}</div></div>
@@ -108,9 +106,9 @@
                         
                     </div>
 
-                    <!-- Api2 -->
+                    <!-- ChineseCateringOnlineOrderStatisticOpData -->
                     <div class="down2" style="overflow-y:hidden;overflow-x:hidden">    
-                        <e-charts :option="Api2Op"/>
+                        <e-charts :option="ChineseCateringOnlineOrderStatisticOpData"/>
                     </div>
 
                 </div>
@@ -146,13 +144,12 @@
 
 <script>
     
-    import axios from 'axios'
-    import * as ApiUser from '../../Web/ApiUser'
-    import {getApi1Data} from '../../Web/Api1'
-    import {getApi2Data} from '../../Web/Api2'
-    import {getApi3Data} from '../../Web/Api3'
-    import {getApi4Data} from '../../Web/Api4'
-    import {getApi5Data} from '../../Web/Api5'
+    import * as PostApiUsers from '../../Web/PostApiUsers'
+    import {postApiSelectChineseCateringStatistic} from '../../Web/PostApiSelectChineseCateringStatistic'
+    import {postApiSelectChineseCateringOnlineOrderStatistic} from '../../Web/PostApiSelectChineseCateringOnlineOrderStatistic'
+    import {postApiSelectChineseCateringPayment} from '../../Web/PostApiSelectChineseCateringPayment'
+    import {postApiSelectChineseCateringBrandStatistic} from '../../Web/PostApiSelectChineseCateringBrandStatistic'
+    import {postApiSelectChineseCateringFundingStatistic} from '../../Web/PostApiSelectChineseCateringFundingStatistic'
     export default{
         name: "login",
 
@@ -160,53 +157,52 @@
             return{
                 // 背景
                 imgSrcBK:require('../../assets/background.jpeg'),
-                Api1Op : {},
-                Api2Op : {},
-                Api3Value:{},
-                Api4Op : {},
-                Api5Value:{},
-                whoAmI:{},
+                ChineseCateringStatisticOpData : {},
+                ChineseCateringOnlineOrderStatisticOpData : {},
+                ChineseCateringPaymentTableData:{},
+                ChineseCateringBrandStatisticOpData : {},
+                ChineseCateringFundingStatisticTableData:{},
+                whoAmIData:{},
             }
         },
         methods:{
             getIdentity(){
-                if (this.whoAmI.Identity == '0') { return "管理员"}
-                if (this.whoAmI.Identity == '1') { return "投资方"}
-                if (this.whoAmI.Identity == '2') { return "从业者"}
-                if (this.whoAmI.Identity == '3') { return "游客"}
+                if (this.whoAmIData.Identity == '0') { return "管理员"}
+                if (this.whoAmIData.Identity == '1') { return "投资方"}
+                if (this.whoAmIData.Identity == '2') { return "从业者"}
+                if (this.whoAmIData.Identity == '3') { return "游客"}
             },
             logout(){
                 this.$cookies.set("camp-session", "", -1)
-                
                 this.$router.push({
                     path: `/`
                 })
+            },
+            getChineseCateringStatisticOpData(){
+                postApiSelectChineseCateringStatistic((res) =>{
+                    this.ChineseCateringStatisticOpData = res.Data
+                })
+            },
+            getChineseCateringOnlineOrderStatisticOpData(){
+                postApiSelectChineseCateringOnlineOrderStatistic((res) =>{
+                    this.ChineseCateringOnlineOrderStatisticOpData = res.Data
+                })
+            },
+            getChineseCateringPaymentTableData(){
+                postApiSelectChineseCateringPayment((res) =>{
+                    this.ChineseCateringPaymentTableData = res.Data
+                })
+            },
+            getChineseCateringBrandStatisticOpData(){
+                postApiSelectChineseCateringBrandStatistic((res) =>{
+                    console.log(res)
+                    this.ChineseCateringBrandStatisticOpData = res.Data
+                })
                 
             },
-            Api1(){
-                getApi1Data((res) =>{
-                    this.Api1Op = res.Data
-                })
-            },
-            Api2(){
-                getApi2Data((res) =>{
-                    this.Api2Op = res.Data
-                })
-            },
-            Api3(){
-                getApi3Data((res) =>{
-                    this.Api3Value = res.Data
-                })
-            },
-            Api4(){
-                getApi4Data((res) =>{
-                    this.Api4Op = res.Data
-                })
-                
-            },
-            Api5(){
-                getApi5Data((res) =>{
-                    this.Api5Value = res.Data
+            getChineseCateringFundingStatisticTableData(){
+                postApiSelectChineseCateringFundingStatistic((res) =>{
+                    this.ChineseCateringFundingStatisticTableData = res.Data
                 })
             },    // 添加自动滚动
             /* 
@@ -250,35 +246,18 @@
                     };
                     roll();
                 // }, 2000);
-                },    
+            },    
         },
         mounted(){
-            ApiUser.getWhoAmIData(this.$route.query.Id , (res)=>{
-                this.whoAmI = res.Data
+            PostApiUsers.postApiWhoAmI(this.$route.query.Id , (res)=>{
+                this.whoAmIData = res.Data
             })
-            this.Api1()
-            this.Api2()
-            this.Api3()
-            this.Api4()
-            this.Api5()
+            this.getChineseCateringBrandStatisticOpData()
+            this.getChineseCateringFundingStatisticTableData()
+            this.getChineseCateringOnlineOrderStatisticOpData()
+            this.getChineseCateringPaymentTableData()
+            this.getChineseCateringStatisticOpData()
             this.autoSroll("scroll_in2")
-            let that = this
-            axios.post(
-                "http://127.0.0.1:1432/api/v1/whoAmI?",{                        
-                    Id : that.Id
-                }
-            ).then(function(res){
-                if (res.data.Code == 0 ){
-                    that.Username = res.data.Data.Username
-                    that.RealName = res.data.Data.RealName
-                    that.Identity = res.data.Data.Identity
-                } else {
-                    
-                }
-            }).catch(function(err){
-                console.log(err)
-            })
-
         },
     }
 

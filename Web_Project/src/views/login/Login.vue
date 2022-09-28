@@ -55,19 +55,19 @@
                         <div class="box2">
                             <div class="leftBox"><div class="text">用户名:</div></div>
                             <div class="rightBox"><div class="text">
-                                <input v-model="Username" placeholder="请输入用户名" id="input" /> 
+                                <input v-model="Username" placeholder="请输入用户名" id="inputUsername" /> 
                             </div></div>
                         </div>
                         <div class="box3">
                             <div class="leftBox"><div class="text">密码</div></div>
                             <div class="rightBox"><div class="text">
-                                <input v-model="Password" type="text" placeholder="请输入密码" id="input"/>
+                                <input v-model="Password" type="text" placeholder="请输入密码" id="inputPassword"/>
                             </div></div>
                         </div>
                         <div class="box4">
                             <div class="leftBox"><div class="text">真实姓名</div></div>
                             <div class="rightBox"><div class="text">
-                                <input v-model="RealName" type="text" placeholder="请输入真实姓名" id="input"/>
+                                <input v-model="RealName" type="text" placeholder="请输入真实姓名" id="inputRealName"/>
                             </div></div>
                         </div>
                         <div class="box5">
@@ -91,13 +91,13 @@
                         <div class="box2">
                             <div class="leftBox"><div class="text">用户名:</div></div>
                             <div class="rightBox"><div class="text">
-                                <input v-model="Username" placeholder="请输入用户名" id="input" /> 
+                                <input v-model="Username" placeholder="请输入用户名" id="inputUsername" /> 
                             </div></div>
                         </div>
                         <div class="box3">
                             <div class="leftBox"><div class="text">密码</div></div>
                             <div class="rightBox"><div class="text">
-                                <input v-model="Password" type="password" placeholder="请输入密码" id="input"/>
+                                <input v-model="Password" type="password" placeholder="请输入密码" id="inputPassword"/>
                             </div></div>
                         </div>
                         <div class="box4">
@@ -145,8 +145,7 @@
 
 <script>
     
-    import axios from "axios"
-
+    import * as PostApiUsers from "../../Web/PostApiUsers"
     export default{
         name: "login",
 
@@ -165,96 +164,70 @@
             }
         },
         methods:{
+            clearData(){
+                this.Username = ""
+                this.Password = ""
+                this.RealName = ""
+            },
             toRegister(){
                 this.todo = "register"
-                this.Username = "",
-                this.Password = "",
-                this.RealName = ""
+                this.clearData()
             },
             toLogin(){
                 this.todo = "login"
-                this.Username = "",
-                this.Password = "",
-                this.RealName = ""
+                this.clearData()
             },
             login(){
                 if ( this.Username=="" || this.Password=="") {
                     alert("请输入用户名或密码")
-                } else {
-                    let that = this
-                    axios.post(
-                        "http://127.0.0.1:1432/api/v1/loginByPassword?",{                        
-                            Username : this.Username, 
-                            Password : this.Password,
-                        }
-                    ).then(function(res){
-                        if (res.data.Code == 0 ){
-                            that.Id = res.data.Data.Id               
-                            if (that.setCookie == 'true'){
-                                that.$cookies.set("camp-session", res.data.Data.Session)                  
-                            }
-                            that.jumpTo()
-                        } else {
+                    return 
+                } 
+                PostApiUsers.postApiLoginByPassword(this.Username, this.Password, 
+                    (res) => {
+                        if ( ! res ) {
                             alert("账号或密码错误")
+                        } else {
+                            if (this.setCookie == 'true') {
+                                this.$cookies.set("camp-session", res.SessionKey)    
+                            }
+                            this.jumpTo( res.Id )
                         }
-                    }).catch(function(err){
-                        console.log(err)
-                    })
-                }
+                    }
+                )
             },
             register(){
                 if ( this.Username=="" || this.Password=="" || this.RealName=="") {
                     alert("请输入完整信息")
                     return
                 }
-                let that = this
-                axios.post(
-                    "http://127.0.0.1:1432/api/v1/create",{
-                        Username: this.Username,
-                        Password: this.Password,
-                        Identity: this.Identity,
-                        RealName :this.RealName
+                PostApiUsers.postApiRegister(this.Username, this.Password, this.RealName, this.Identity,
+                    (res) => {
+                        alert(res)
+                        if ( res == "注册成功" ) {
+                            this.todo = "login"
+                        }
                     }
-                ).then(function(res){
-                    if (res.data.Code == 0 ){
-                        alert("注册成功")
-                        that.todo = "login"        
-                    } else {
-                        alert("用户已存在")
-                    }
-                }).catch(function(err){
-                    console.log(err)
-                })
+                )
+                
             },
-            jumpTo(){
-                let that = this
+            jumpTo( Id ){
                 this.$router.push({
                     path: `/data/Screen`,
                     query: {
-                        Id: that.Id
+                        Id: Id
                     },
                 })
             }
         },
         mounted() {
             // 免登录
-            let that = this
             let SessionKey = this.$cookies.get("camp-session")
             if (SessionKey) {
-                axios.post(
-                    "http://127.0.0.1:1432/api/v1/loginBySession?",{                        
-                        SessionKey: SessionKey
+               PostApiUsers.postApiLoginBySession(SessionKey, (res) => {
+                    if (res) {
+                        this.jumpTo(res.Id)
                     }
-                ).then(function(res){
-                    if (res.data.Code == 0 ){
-                        that.Id = res.data.Data.Id
-                        that.jumpTo()
-                    } else {
-                        
-                    }
-                }).catch(function(err){
-                    console.log(err)
-                })
+               })
             }
         }
         
@@ -424,7 +397,23 @@
     text-align: center;  
 }
 
- #input{
+ #inputUsername{
+    text-align: left;
+    height: 80%;
+    width: 80%;
+    top: 10%; 
+    left: 0%;
+    position: absolute;
+ }
+ #inputPassword{
+    text-align: left;
+    height: 80%;
+    width: 80%;
+    top: 10%; 
+    left: 0%;
+    position: absolute;
+ }
+ #inputRealName{
     text-align: left;
     height: 80%;
     width: 80%;

@@ -7,8 +7,14 @@ import (
 	"github.com/go-redis/redis"
 )
 
+// RDB 全局 Redis 操作变量
 var RDB *redis.Client
 
+// InitRedis
+//
+//	@Description: 初始化 Redis 连接
+//	@data 2022-09-28 13:42:39
+//	@author WuShaobei
 func InitRedis() {
 	// 连接 Redis
 	RDB = redis.NewClient(&redis.Options{
@@ -35,8 +41,6 @@ func InitRedis() {
 		panic(err)
 	}
 	fmt.Println("delete redis:", res)
-
-	// TODO 从数据库中提取剩余 Cap
 
 	fmt.Println("open redis success")
 
