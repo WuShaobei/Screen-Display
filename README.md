@@ -2,8 +2,6 @@
 
 ---
 
-![p1](./picture/p1.png)
-
 ---
 
 ```apl
@@ -90,8 +88,6 @@ src
 
 ### 1. 登录页
 
-![p2](./picture/p2.png)
-
 *   (免登录直接跳转数据页)
 *   提示预先写入的用户数据(独立模块可拆卸)
 *   收集登录信息，提供 3 天没登录选项，提供登录按键
@@ -101,14 +97,10 @@ src
 
 *   登录页的另一种形式
 
-![p3](./picture/p3.png)
-
 *   收集用户信息，提供注册按键
 *   提供返回登录按键
 
 ### 3. 数据页
-
-![p4](./picture/p4.png)
 
 *   数据显示
 *   用户信息显示
@@ -668,7 +660,7 @@ package types
 // ChineseCateringStatistic
 // Table5
 type ChineseCateringStatistic struct {
-	Id                    string  `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Id                    uint    `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
 	Year                  int     `gorm:"INT NULL DEFAULT NULL"`
 	TotalAmount           float64 `gorm:"FLOAT NULL DEFAULT NULL"`
 	TotalAmountPercentage float64 `gorm:"FLOAT NULL DEFAULT NULL"`
@@ -746,7 +738,7 @@ package types
 // ChineseCateringOnlineOrderStatistic
 // Table3
 type ChineseCateringOnlineOrderStatistic struct {
-	Id          string `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Id          uint   `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
 	Year        int    `gorm:"INT NULL DEFAULT NULL"`
 	Month       int    `gorm:"INT NULL DEFAULT NULL"`
 	OrderAmount int    `gorm:"INT NULL DEFAULT NULL"`
@@ -812,7 +804,7 @@ func GetChineseCateringOnlineOrderStatistic(year, month int) types.Api2Data {
 }
 ```
 
-#### 2. Api3 接口
+#### 4. Api3 接口
 
 1.   从请求中读取 require 数据
 2.   以从 require.BeginYear 到 require.EndYear 中的每一年 year 作为参数，从数据库中读取 `AVG( salary )` 和 `COUNT(*)`，并以此添加到 response 中
@@ -826,7 +818,7 @@ package types
 // ChineseCateringPayment
 // Table4
 type ChineseCateringPayment struct {
-	Id     string `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Id     uint   `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
 	Year   int    `gorm:"INT NULL DEFAULT NULL"`
 	Name   string `gorm:"VARCHAR(255) NULL DEFAULT NULL"`
 	Salary int    `gorm:"INT NULL DEFAULT NULL"`
@@ -839,7 +831,7 @@ type Api3Request struct {
 
 type Api3Data struct {
 	Year        int
-	AvgSalary   string
+	AvgSalary   float64
 	CountSalary string
 }
 
@@ -883,12 +875,13 @@ func GetChineseCateringPayment(year int) types.Api3Data {
 		WHERE year = ?
 	`
 	dao.DB.Raw(sqlStr, year).Scan(&sqlData)
-
+	sqlData.AvgSalary = dao.Decimal(sqlData.AvgSalary)
 	return sqlData
 }
+
 ```
 
-#### 2. Api4 接口
+#### 5. Api4 接口
 
 1.   安装四个单词从数据库中读取所有品牌名称数组
 2.   将字符串数组拼接为字符串并添加到 response 中
@@ -902,7 +895,7 @@ package types
 // ChineseCateringBrandStatistic
 // Table1
 type ChineseCateringBrandStatistic struct {
-	Id    string `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Id    uint   `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
 	Brand string `gorm:"INT NULL DEFAULT NULL"`
 	Other string `gorm:"VARCHAR(255) NULL DEFAULT NULL"`
 }
@@ -952,7 +945,7 @@ func GetChineseCateringBrandStatistic(minNum, maxNum int) string {
 
 ```
 
-#### 2. Api5 接口
+#### 6. Api5 接口
 
 1.   从请求中读取 require 数据
 2.   以从 require.EndYear 到 require.BeginYear 中的每一年 year 及其每一年中的 12月到 1月的每个月作为 month 作为参数，从数据库中读取全部数据 Data
@@ -1110,7 +1103,7 @@ func Cors() gin.HandlerFunc {
 
 ```
 
-### main()
+### 3. main()
 
 ```go
 func main() {
@@ -1138,6 +1131,8 @@ import (
 	"Back_Project/types"
 	"crypto/md5"
 	"fmt"
+	"math/rand"
+	"strconv"
 	"strings"
 	"time"
 
@@ -1150,7 +1145,7 @@ const (
 	passWord = "12345678"
 	ip       = "localhost"
 	port     = "3306"
-	dbName   = "Final_Project"
+	dbName   = "test"
 )
 
 var DB *gorm.DB
@@ -1186,6 +1181,62 @@ func ConnectDb() {
 
 // MD5
 // 密码加密
+
+func InitTables() {
+	// 删除 数据表
+	if err := DB.Exec("DROP TABLE chinese_catering_statistics"); err != nil {
+		fmt.Println(err)
+	}
+	if err := DB.Exec("DROP TABLE chinese_catering_online_order_statistics"); err != nil {
+		fmt.Println(err)
+	}
+	if err := DB.Exec("DROP TABLE chinese_catering_payments"); err != nil {
+		fmt.Println(err)
+	}
+	if err := DB.Exec("DROP TABLE chinese_catering_brand_statistics"); err != nil {
+		fmt.Println(err)
+	}
+	if err := DB.Exec("DROP TABLE chinese_catering_funding_statistics"); err != nil {
+		fmt.Println(err)
+	}
+	if err := DB.Exec("DROP TABLE chinese_catering_users"); err != nil {
+		fmt.Println(err)
+	}
+
+	// 重新创建数据表
+	if err := DB.AutoMigrate(&types.ChineseCateringStatistic{}); err != nil {
+		return
+	}
+	if err := DB.AutoMigrate(&types.ChineseCateringOnlineOrderStatistic{}); err != nil {
+		return
+	}
+	if err := DB.AutoMigrate(types.ChineseCateringPayment{}); err != nil {
+		return
+	}
+	if err := DB.AutoMigrate(types.ChineseCateringBrandStatistic{}); err != nil {
+		return
+	}
+	if err := DB.AutoMigrate(&types.ChineseCateringFundingStatistic{}); err != nil {
+		return
+	}
+	if err := DB.AutoMigrate(&types.ChineseCateringUser{}); err != nil {
+		return
+	}
+
+	initChineseCateringStatistic()
+	initChineseCateringOnlineOrderStatistic()
+	initChineseCateringPayment()
+	initChineseCateringBrandStatistic()
+	initChineseCateringFundingStatistic()
+	initUSer()
+
+	fmt.Println("create table success")
+}
+
+func Decimal(value float64) float64 {
+	value, _ = strconv.ParseFloat(fmt.Sprintf("%.2f", value+0.005), 64)
+	return value
+}
 func MD5(str string) string {
 	data := []byte(str) //切片
 	has := md5.Sum(data)
@@ -1193,14 +1244,88 @@ func MD5(str string) string {
 	return md5str
 }
 
-func InitUserTable() {
-	// 删除 user
-	if err := DB.Exec("DROP TABLE chinese_catering_users"); err != nil {
-		fmt.Println(err)
+func initChineseCateringStatistic() {
+	for year := 2014; year <= 2021; year++ {
+		DB.Create(&types.ChineseCateringStatistic{
+			Year:                  year,
+			TotalAmount:           Decimal(float64(rand.Intn(500)) / 10.0),
+			TotalAmountPercentage: Decimal(float64(rand.Intn(200))/10.0 - 10),
+		})
 	}
-	if err := DB.AutoMigrate(&types.ChineseCateringUser{}); err != nil {
-		return
+}
+
+func initChineseCateringOnlineOrderStatistic() {
+	for year := 2010; year <= 2021; year++ {
+		for month := 1; month <= 12; month++ {
+			DB.Create(&types.ChineseCateringOnlineOrderStatistic{
+				Year:        year,
+				Month:       month,
+				OrderAmount: rand.Intn(50),
+			})
+		}
 	}
+}
+func initChineseCateringPayment() {
+	user := 0
+	for year := 2018; year <= 2021; year++ {
+		for num := 0; num < 1000+rand.Intn(1000); num++ {
+			user += 1
+			DB.Create(&types.ChineseCateringPayment{
+				Year:   year,
+				Name:   "User" + strconv.Itoa(user),
+				Salary: 2000 + rand.Intn(8000),
+			})
+		}
+	}
+}
+
+func initChineseCateringBrandStatistic() {
+	brand := 0
+	for num := 0; num < 5+rand.Intn(5); num++ {
+		brand += 1
+		DB.Create(&types.ChineseCateringBrandStatistic{
+			Brand: "brand" + strconv.Itoa(brand),
+			Price: rand.Intn(79),
+		})
+	}
+	for num := 0; num < 5+rand.Intn(5); num++ {
+		brand += 1
+		DB.Create(&types.ChineseCateringBrandStatistic{
+			Brand: "brand" + strconv.Itoa(brand),
+			Price: 81 + rand.Intn(39),
+		})
+	}
+	for num := 0; num < 5+rand.Intn(5); num++ {
+		brand += 1
+		DB.Create(&types.ChineseCateringBrandStatistic{
+			Brand: "brand" + strconv.Itoa(brand),
+			Price: 121 + rand.Intn(79),
+		})
+	}
+	for num := 0; num < 5+rand.Intn(5); num++ {
+		brand += 1
+		DB.Create(&types.ChineseCateringBrandStatistic{
+			Brand: "brand" + strconv.Itoa(brand),
+			Price: 201 + rand.Intn(800),
+		})
+	}
+}
+func initChineseCateringFundingStatistic() {
+	for year := 2021; year <= 2022; year++ {
+		for month := 1; month <= 12; month++ {
+			for i := 0; i < rand.Intn(10); i++ {
+				DB.Create(&types.ChineseCateringFundingStatistic{
+					FundingYear:  year,
+					FundingMonth: month,
+					FundingRound: strconv.Itoa(rand.Intn(10)),
+					Brand:        "Brand" + strconv.Itoa(rand.Intn(100)),
+					Investor:     "Investor" + strconv.Itoa(rand.Intn(10)),
+				})
+			}
+		}
+	}
+}
+func initUSer() {
 	DB.Create(&types.ChineseCateringUser{
 		Username: "LocalHost",
 		Password: MD5("127.0.0.1"),
@@ -1225,7 +1350,6 @@ func InitUserTable() {
 		RealName: "Tourist",
 		Identity: types.Tourist,
 	})
-	fmt.Println("create table success")
 }
 
 ```
@@ -1281,14 +1405,14 @@ func InitRedis() {
 
 ```
 
-### 3. main
+### 3. main()
 
 ```go
 func main() {
     //Sql
 	dao.ConnectDb()
 	// 重置 User表
-	dao.InitUserTable()
+	dao.InitTables()
 
 	// Redis
 	dao.InitRedis()

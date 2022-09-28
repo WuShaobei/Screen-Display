@@ -3,7 +3,7 @@ package types
 // ChineseCateringPayment
 // Table4
 type ChineseCateringPayment struct {
-	Id     string `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Id     uint   `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
 	Year   int    `gorm:"INT NULL DEFAULT NULL"`
 	Name   string `gorm:"VARCHAR(255) NULL DEFAULT NULL"`
 	Salary int    `gorm:"INT NULL DEFAULT NULL"`
@@ -16,7 +16,7 @@ type Api3Request struct {
 
 type Api3Data struct {
 	Year        int
-	AvgSalary   string
+	AvgSalary   float64
 	CountSalary string
 }
 

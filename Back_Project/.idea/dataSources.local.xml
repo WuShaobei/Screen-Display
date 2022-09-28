@@ -13,7 +13,7 @@
         <introspection-scope>
           <node kind="schema">
             <name qname="@" />
-            <name qname="Final_Project" />
+            <name qname="test" />
           </node>
         </introspection-scope>
       </schema-mapping>

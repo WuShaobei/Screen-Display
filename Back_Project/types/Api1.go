@@ -3,7 +3,7 @@ package types
 // ChineseCateringStatistic
 // Table5
 type ChineseCateringStatistic struct {
-	Id                    string  `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Id                    uint    `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
 	Year                  int     `gorm:"INT NULL DEFAULT NULL"`
 	TotalAmount           float64 `gorm:"FLOAT NULL DEFAULT NULL"`
 	TotalAmountPercentage float64 `gorm:"FLOAT NULL DEFAULT NULL"`

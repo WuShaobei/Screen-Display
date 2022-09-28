@@ -5,51 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4eac7947-a998-415a-b21f-c397df65c4ef" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/manager/ApiUserChineseCateringUser.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 12.55.23.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 15.25.04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 15.31.21.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture/截屏2022-09-27 15.33.53.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/38672533-6c2e-4edb-834c-bc9b8dbe5421.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/38672533-6c2e-4edb-834c-bc9b8dbe5421.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/mysql.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api2GetChineseCateringOnlineOrderStatistic.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager/Api2GetChineseCateringOnlineOrderStatistic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api5GetChineseCateringFundingStatistic.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager/Api5GetChineseCateringFundingStatistic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/ApiUser.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api1.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api1.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api2.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api2.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api3.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api3.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api4.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api4.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api5.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/Api5.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/Create.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/Create.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/LoginByPassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/LoginByPassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/LoginBySession.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/LoginBySession.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/WhoAmI.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/WhoAmI.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/Api3GetChineseCateringPayment.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager/Api3GetChineseCateringPayment.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types/Api1.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api1.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types/Api2.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api2.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types/Api3.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api3.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types/Api4.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api4.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types/Api5.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/Api5.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/AqiUsers.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/AqiUsers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/java/com/example/javaProject/JavaProjectApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/java/com/example/javaProject/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Project/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Final_Project.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/components/HelloWorld.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Web_Project/src/views/data/Screen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/views/data/Screen.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/views/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/views/login/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../entity.drawio" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../picture/entity.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture/p1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture/p2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture/p3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture/p4.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,33 +54,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/wushaobei/Desktop/Final_Project/Back_Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "/Users/wushaobei/Library/Mobile Documents/com~apple~CloudDocs/www.github.com/Screen-Display/Back_Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "watcher.settings"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/service" />

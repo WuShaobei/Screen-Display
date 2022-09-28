@@ -3,10 +3,10 @@ package types
 // ChineseCateringOnlineOrderStatistic
 // Table3
 type ChineseCateringOnlineOrderStatistic struct {
-	Id          string `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
-	Year        int    `gorm:"INT NULL DEFAULT NULL"`
-	Month       int    `gorm:"INT NULL DEFAULT NULL"`
-	OrderAmount int    `gorm:"INT NULL DEFAULT NULL"`
+	Id          uint `gorm:"primaryKey BIGINT NOT NULL AUTOINCREMENT"`
+	Year        int  `gorm:"INT NULL DEFAULT NULL"`
+	Month       int  `gorm:"INT NULL DEFAULT NULL"`
+	OrderAmount int  `gorm:"INT NULL DEFAULT NULL"`
 }
 
 type Api2Request struct {

@@ -13,7 +13,7 @@ func main() {
 	//Sql
 	dao.ConnectDb()
 	// 重置 User表
-	dao.InitUserTable()
+	dao.InitTables()
 
 	// Redis
 	dao.InitRedis()

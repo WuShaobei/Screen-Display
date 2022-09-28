@@ -13,7 +13,7 @@
             <div class="content">
                 
                 <!-- Api4 -->
-                <div class="leftView">
+                <div class="leftView" style="overflow-y:hidden;overflow-x:hidden">
                     <e-charts :option="Api4Op"/>
                 </div>
                 
@@ -21,13 +21,13 @@
                 <div class="centerView">
                     
                     <!-- Api1 -->
-                    <div class="top1">
+                    <div class="top1" style="overflow-y:hidden;overflow-x:hidden">
                         <e-charts :option="Api1Op"/>
                     </div>
                     
                     <!-- Api5 -->
                     <div class="down1">
-                        <div id="scroll_in2" class="htp-list_scroll_in" style="height: 100%;overflow-y:hidden;font-size:20px;">
+                        <div id="scroll_in2" class="htp-list_scroll_in" style="height: 100%;overflow-y:hidden;overflow-x:hidden;font-size:20px;">
                             
                             <table>
                                 <tr>
@@ -68,7 +68,7 @@
                 <div class="rightView">
 
                     <!-- ApiUser -->
-                    <div class="top0">    
+                    <div class="top0" style="overflow-y:hidden;overflow-x:hidden">    
                         <div class="table0Box1">
                             <div class="text0">
                                 <h3>
@@ -89,7 +89,7 @@
                     </div>
 
                     <!-- Api3 -->
-                    <div class="top2">
+                    <div class="top2" style="overflow-y:hidden;overflow-x:hidden">
                         <div class="table1" style="font-size:20px;">
                             <div class="table1Box" >
                                 <div class="text" style="text-align: left;">2018年-2021年餐饮就业人数行业平均报酬</div>
@@ -109,7 +109,7 @@
                     </div>
 
                     <!-- Api2 -->
-                    <div class="down2">    
+                    <div class="down2" style="overflow-y:hidden;overflow-x:hidden">    
                         <e-charts :option="Api2Op"/>
                     </div>
 
@@ -118,7 +118,7 @@
             </div>
 
             <!-- Title -->
-            <div class="Title">
+            <div class="Title" style="overflow-y:hidden;overflow-x:hidden">
 
                 <div class="text">
 

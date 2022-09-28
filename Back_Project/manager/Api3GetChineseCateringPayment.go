@@ -15,6 +15,6 @@ func GetChineseCateringPayment(year int) types.Api3Data {
 		WHERE year = ?
 	`
 	dao.DB.Raw(sqlStr, year).Scan(&sqlData)
-
+	sqlData.AvgSalary = dao.Decimal(sqlData.AvgSalary)
 	return sqlData
 }
