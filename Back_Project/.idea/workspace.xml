@@ -4,58 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4eac7947-a998-415a-b21f-c397df65c4ef" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/manager/SelectChineseCateringOnlineOrderStatisticByYearAndMonth.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manager/selectChineseCateringBrandStatisticByPrice.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manager/selectChineseCateringFundingStatisticByYearAndMonth.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manager/selectChineseCateringPaymentByYear.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manager/selectChineseCateringStatisticByYear.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manager/users.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/ChineseCateringBrandStatistic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/ChineseCateringFundingStatistic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/ChineseCateringOnlineOrderStatistic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/ChineseCateringPayment.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/ChineseCateringStatistic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/Users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/38672533-6c2e-4edb-834c-bc9b8dbe5421.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/38672533-6c2e-4edb-834c-bc9b8dbe5421.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/mysql.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/redis.go" beforeDir="false" afterPath="$PROJECT_DIR$/dao/redis.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api1GetChineseCateringStatistic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api2GetChineseCateringOnlineOrderStatistic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api3GetChineseCateringPayment.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api4GetChineseCateringBrandStatistic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/Api5GetChineseCateringFundingStatistic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/ApiUserChineseCateringUser.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/middlewares.go" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/middlewares.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api1.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiSelectChineseCateringStatistic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api2.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiSelectChineseCateringOnlineOrderStatistic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api3.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiSelectChineseCateringPayment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api4.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiSelectChineseCateringBrandStatistic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Api5.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiSelectChineseCateringFundingStatistic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/Create.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/ApiRegister.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/LoginByPassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/ApiLoginByPassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/LoginBySession.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/ApiLoginBySession.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ApiUsers/WhoAmI.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/ApiUsers/ApiWhoAmI.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Api1.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Api2.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Api3.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Api4.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Api5.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/AqiUsers.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/Web/Api1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/Web/Api2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/Web/Api3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/Web/Api4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/Web/Api5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/Web/ApiUser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/views/data/Screen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/views/data/Screen.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Web_Project/src/views/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Web_Project/src/views/login/Login.vue" afterDir="false" />
-    </list>
+    <list default="true" id="4eac7947-a998-415a-b21f-c397df65c4ef" name="变更" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
