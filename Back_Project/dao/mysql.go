@@ -142,6 +142,7 @@ func MD5(str string) string {
 //	@data 2022-09-28 14:12:47
 //	@author WuShaobei
 func initChineseCateringStatistic() {
+
 	for year := 2014; year <= 2021; year++ {
 		DB.Create(&types.ChineseCateringStatistic{
 			Year:                  year,
