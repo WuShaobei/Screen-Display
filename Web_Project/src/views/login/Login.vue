@@ -1,7 +1,7 @@
 <!--
  * @Author: WuShaobei
  * @Date: 2022-09-28 09:21:46
- * @LastEditTime: 2022-09-29 14:50:23
+ * @LastEditTime: 2022-09-29 15:05:21
  * @FilePath: /Web_Project/src/views/login/Login.vue
  * @Description: 登录页
 -->
@@ -172,19 +172,38 @@
             }
         },
         methods:{
+            /**
+             * @description: 切换表单时清除信息
+             * @return {*}
+             */            
             clearData(){
                 this.Username = ""
                 this.Password = ""
                 this.RealName = ""
             },
+
+            /**
+             * @description: 从登录页切换到注册页
+             * @return {*}
+             */            
             toRegister(){
                 this.todo = "register"
                 this.clearData()
             },
+
+            /**
+             * @description: 从注册页切换到登录页
+             * @return {*}
+             */            
             toLogin(){
                 this.todo = "login"
                 this.clearData()
             },
+
+            /**
+             * @description: 登录操作
+             * @return {*}
+             */            
             login(){
                 if ( this.Username=="" || this.Password=="") {
                     alert("请输入用户名或密码")
@@ -203,6 +222,11 @@
                     }
                 )
             },
+
+            /**
+             * @description: 注册操作
+             * @return {*}
+             */            
             register(){
                 if ( this.Username=="" || this.Password=="" || this.RealName=="") {
                     alert("请输入完整信息")
@@ -218,6 +242,12 @@
                 )
                 
             },
+
+            /**
+             * @description: 跳转到大屏页
+             * @param {*} Id 用户Id 携带的参数
+             * @return {*}
+             */            
             jumpTo( Id ){
                 this.$router.push({
                     path: `/data/Screen`,
