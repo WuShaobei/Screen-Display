@@ -1,3 +1,11 @@
+<!--
+ * @Author: WuShaobei
+ * @Date: 2022-09-28 09:21:46
+ * @LastEditTime: 2022-09-29 14:56:41
+ * @FilePath: /Web_Project/src/views/data/Screen.vue
+ * @Description: 大屏显示页
+-->
+
 <template>
     <div class="AllDataView">
         
@@ -166,33 +174,62 @@
             }
         },
         methods:{
+            /**
+             * @description: 用户类型参数转用户类型名
+             * @return {*}
+             */            
             getIdentity(){
                 if (this.whoAmIData.Identity == '0') { return "管理员"}
                 if (this.whoAmIData.Identity == '1') { return "投资方"}
                 if (this.whoAmIData.Identity == '2') { return "从业者"}
                 if (this.whoAmIData.Identity == '3') { return "游客"}
             },
+
+            /**
+             * @description: 注销登录
+             * @return {*}
+             */            
             logout(){
                 this.$cookies.set("camp-session", "", -1)
                 this.$router.push({
                     path: `/`
                 })
             },
+
+            /**
+             * @description: 获取 ChineseCateringStatistic 的图表数据
+             * @return {*}
+             */            
             getChineseCateringStatisticOpData(){
                 postApiSelectChineseCateringStatistic((res) =>{
                     this.ChineseCateringStatisticOpData = res.Data
                 })
             },
+
+            /**
+             * @description: 获取 ChineseCateringOnlineOrderStatistic 的图表数据
+             * @return {*}
+             */            
             getChineseCateringOnlineOrderStatisticOpData(){
                 postApiSelectChineseCateringOnlineOrderStatistic((res) =>{
                     this.ChineseCateringOnlineOrderStatisticOpData = res.Data
                 })
             },
+
+            /**
+             * @description: 获取 ChineseCateringPayment 的表格数据
+             * @return {*}
+             */            
             getChineseCateringPaymentTableData(){
                 postApiSelectChineseCateringPayment((res) =>{
                     this.ChineseCateringPaymentTableData = res.Data
                 })
             },
+
+            /**
+             * @description: 获取 ChineseCateringBrandStatistic 的图表数据
+             * @return {*}
+             */            
             getChineseCateringBrandStatisticOpData(){
                 postApiSelectChineseCateringBrandStatistic((res) =>{
                     console.log(res)
@@ -200,15 +237,23 @@
                 })
                 
             },
+
+            /**
+             * @description: 获取 ChineseCateringFundingStatistic 的表格数据
+             * @return {*}
+             */            
             getChineseCateringFundingStatisticTableData(){
                 postApiSelectChineseCateringFundingStatistic((res) =>{
                     this.ChineseCateringFundingStatisticTableData = res.Data
                 })
-            },    // 添加自动滚动
-            /* 
-            Id   需要滚动的区域 id名称
-            */
-            autoSroll(Id) {
+            },
+
+            /**
+             * @description: 滚动显示控制
+             * @param {*} srollId
+             * @return {*}
+             */            
+            autoSroll(srollId) {
             // flag 为true时停止滚动
                 var flag = false;
                 // 定时器
@@ -218,34 +263,29 @@
                     timer = setInterval(function() {
                         flag = true;
                         if (flag) {
-                            var current = document.getElementById(Id).scrollTop;
+                            var current = document.getElementById(srollId).scrollTop;
                             if (current == h) {
                                 //滚动到底端,返回顶端
                                 h = 0;
-                                document.getElementById(Id).scrollTop = h + 1;
+                                document.getElementById(srollId).scrollTop = h + 1;
                             } else {
                                 //以25ms/3.5px的速度滚动
                                 h = current;
-                                document.getElementById(Id).scrollTop = h + 1;
-                            }
-                            
+                                document.getElementById(srollId).scrollTop = h + 1;
+                            }       
                         }
-                        //获取当前滚动条高度
-                        }, 50);
-                    }
-                // setTimeout(function() {
-                    //滚动区域内单击鼠标 滚动暂停 再次点击鼠标 继续滚动
-                    document.getElementById(Id).onclick = () => {
+                    }, 50);
+                }
                     
+                document.getElementById(srollId).onclick = () => {       
                     if (flag) {
                         flag = false;
                         clearInterval(timer);
                     } else {
                         roll();
                     }
-                    };
-                    roll();
-                // }, 2000);
+                };
+                roll();
             },    
         },
         mounted(){
