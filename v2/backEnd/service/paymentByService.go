@@ -1,3 +1,6 @@
+// Package service
+// @Description: 薪资相关接口
+
 package service
 
 import (
@@ -8,6 +11,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// PostAvgSalaryAndCountsByYearFromPaymentService
+//
+//	@Description: 获取平均薪资和用户类型接口
+//	@param c
 func PostAvgSalaryAndCountsByYearFromPaymentService(c *gin.Context) {
 	var request types.PostAmountAndPercentageByYearFromStatisticRequest
 	if err := c.ShouldBind(&request); err != nil {

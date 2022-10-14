@@ -1,5 +1,5 @@
 // Package types
-// @Description: 类型及常量设置
+// @Description: 类型定义及常量设置
 
 package types
 

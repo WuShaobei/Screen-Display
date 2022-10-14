@@ -1,3 +1,5 @@
+// Package manager
+// @Description: 火锅品牌 manager 类
 package manager
 
 import (
@@ -10,7 +12,13 @@ type BrandStatisticManager struct {
 	brandStatisticDao dao.BrandStatisticDao
 }
 
-func (b *BrandStatisticManager) GetData() ([]string, types.ErrNo) {
+// GetAllData
+//
+//	@Description: 获取所有火锅品牌数据
+//	@receiver b *BrandStatisticManager
+//	@return []string
+//	@return types.ErrNo
+func (b *BrandStatisticManager) GetAllData() ([]string, types.ErrNo) {
 	var res []string
 	need := 0
 	have := 0

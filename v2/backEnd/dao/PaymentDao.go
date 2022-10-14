@@ -1,3 +1,6 @@
+// Package dao
+// @Description: 薪资 dao 类
+
 package dao
 
 import (
@@ -9,6 +12,12 @@ import (
 type PaymentDao struct {
 }
 
+// SelectAvgSalaryAndCountsByYearFromMySQL
+//
+//	@Description: 从 MySQL 中获取 year 年的平均薪资和人数然后写入 redis
+//	@receiver p *PaymentDao
+//	@param year
+//	@return types.ErrNo
 func (p *PaymentDao) SelectAvgSalaryAndCountsByYearFromMySQL(year int) types.ErrNo {
 	data := struct {
 		Avg    float64
@@ -24,6 +33,14 @@ func (p *PaymentDao) SelectAvgSalaryAndCountsByYearFromMySQL(year int) types.Err
 	return p.insertAvgSalaryAndCountsDataToRedis(strconv.Itoa(year), types.Decimal(data.Avg), data.Counts)
 }
 
+// insertAvgSalaryAndCountsDataToRedis
+//
+//	@Description: 将 year 年的平均薪资和人数写入 redis
+//	@receiver p *PaymentDao
+//	@param year
+//	@param avgSalary
+//	@param counts
+//	@return types.ErrNo
 func (p *PaymentDao) insertAvgSalaryAndCountsDataToRedis(year, avgSalary, counts string) types.ErrNo {
 	if err := RDB.HSet("PaymentDataIn"+year, "avgSalary", avgSalary).Err(); err != nil {
 		log.Fatal(err)
@@ -36,6 +53,13 @@ func (p *PaymentDao) insertAvgSalaryAndCountsDataToRedis(year, avgSalary, counts
 	return types.OK
 }
 
+// SelectAvgSalaryAndCountsByYearFromRedis
+//
+//	@Description: 从 redis 中获取 year 年的平均薪资和人数
+//	@receiver p *PaymentDao
+//	@param year
+//	@return types.PostAvgSalaryAndCountsByYearFromPaymentData
+//	@return types.ErrNo
 func (p *PaymentDao) SelectAvgSalaryAndCountsByYearFromRedis(year string) (types.PostAvgSalaryAndCountsByYearFromPaymentData, types.ErrNo) {
 	data := types.PostAvgSalaryAndCountsByYearFromPaymentData{Year: year}
 

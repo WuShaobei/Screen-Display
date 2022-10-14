@@ -1,3 +1,6 @@
+// Package manager
+// @Description: 餐饮市场 manager 类
+
 package manager
 
 import (
@@ -10,6 +13,14 @@ type StatisticManager struct {
 	statisticDao dao.StatisticDao
 }
 
+// PostAmountAndPercentageByYear
+//
+//	@Description: 获取规模和占比
+//	@receiver s StatisticManager
+//	@param beginYear
+//	@param endYear
+//	@return []types.PostAmountAndPercentageByYearFromStatisticData
+//	@return types.ErrNo
 func (s *StatisticManager) PostAmountAndPercentageByYear(beginYear, endYear int) ([]types.PostAmountAndPercentageByYearFromStatisticData, types.ErrNo) {
 	need := endYear - beginYear + 1
 	res := make([]types.PostAmountAndPercentageByYearFromStatisticData, need)

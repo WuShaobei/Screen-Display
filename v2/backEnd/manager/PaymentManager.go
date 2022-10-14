@@ -1,3 +1,5 @@
+// Package manager
+// @Description: 薪资 manager 类
 package manager
 
 import (
@@ -10,6 +12,14 @@ type PaymentManager struct {
 	paymentDao *dao.PaymentDao
 }
 
+// PostAvgSalaryAndCountsByYearFromPaymentManage
+//
+//	@Description: 获取平均薪资和人数
+//	@receiver p *PaymentManager
+//	@param beginYear
+//	@param endYear
+//	@return []types.PostAvgSalaryAndCountsByYearFromPaymentData
+//	@return types.ErrNo
 func (p *PaymentManager) PostAvgSalaryAndCountsByYearFromPaymentManage(beginYear, endYear int) ([]types.PostAvgSalaryAndCountsByYearFromPaymentData, types.ErrNo) {
 	need := 0
 	have := 0

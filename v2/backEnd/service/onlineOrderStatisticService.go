@@ -1,3 +1,5 @@
+// Package service
+// @Description: 网上订单相关接口
 package service
 
 import (
@@ -8,6 +10,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// PostAmountByYearAndMonthFromOnlineOrderStatisticService
+//
+//	@Description: 获取网上订单量接口
+//	@param c
 func PostAmountByYearAndMonthFromOnlineOrderStatisticService(c *gin.Context) {
 	var request types.PostAmountByYearAndMonthFromOnlineOrderStatisticRequest
 	if err := c.ShouldBind(&request); err != nil {

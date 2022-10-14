@@ -1,3 +1,5 @@
+// Package dao
+// @Description: redis 连接和基础设置
 package dao
 
 import (
@@ -13,8 +15,6 @@ var RDB *redis.Client
 // InitRedis
 //
 //	@Description: 初始化 Redis 连接
-//	@data 2022-09-28 13:42:39
-//	@author WuShaobei
 func InitRedis() {
 	// 连接 Redis
 	RDB = redis.NewClient(&redis.Options{
@@ -31,7 +31,7 @@ func InitRedis() {
 	_, err := RDB.Ping().Result()
 
 	if err != nil {
-		fmt.Println("open redis fail")
+		fmt.Println("Open Redis Err")
 		return
 	}
 
@@ -40,10 +40,7 @@ func InitRedis() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("delete redis:", res)
+	fmt.Println("Delete Redis:", res)
 
-	fmt.Println("open redis success")
-
-	fmt.Println("init success")
-
+	fmt.Println("Open Redis Success")
 }

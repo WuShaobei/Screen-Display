@@ -1,5 +1,10 @@
+///
+ // @Date: 2022-10-09 14:55:13
+ // @LastEditTime: 2022-10-14 17:15:32
+ // @FilePath: /frontEnd/src/router/index.js
+ // @Description: 
+ ///
 // /$$
-//  $ @Author: WuShaobei
 //  $ @Date: 2022-10-09 14:55:13
 //  $ @LastEditTime: 2022-10-09 16:54:08
 //  $ @FilePath: /Screen-Display/v2/frontEnd/src/router/index.js

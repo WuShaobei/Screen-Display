@@ -1,12 +1,17 @@
 ///
- // @Author: WuShaobei
  // @Date: 2022-10-10 17:36:47
- // @LastEditTime: 2022-10-13 16:55:50
+ // @LastEditTime: 2022-10-14 17:56:15
  // @FilePath: /frontEnd/src/api/user.js
  // @Description: 用户类 axios 请求
  ///
 import axios from 'axios'
 
+/******* 
+ * @description: 获取用户信息
+ * @param {*} id
+ * @param {*} callback
+ * @return {*}
+ */
 function postWhoAmIApi(id, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/user/whoAmI",{
@@ -23,6 +28,15 @@ function postWhoAmIApi(id, callback) {
     })
 }
 
+
+/******* 
+ * @description: 通过密码登录
+ * @param {*} username
+ * @param {*} password
+ * @param {*} setCookie
+ * @param {*} callback
+ * @return {*}
+ */
 function postLoginByPasswordApi(username, password, setCookie, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/user/loginByPassword",{
@@ -41,6 +55,10 @@ function postLoginByPasswordApi(username, password, setCookie, callback) {
     })
 }
 
+/******* 
+ * @description: 通过 session 值登录
+ * @return {*}
+ */
 function postLoginBySessionKeyApi(sessionKey, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/user/loginBySessionKey",{
@@ -58,6 +76,12 @@ function postLoginBySessionKeyApi(sessionKey, callback) {
 }
 
 
+/******* 
+ * @description: 登出
+ * @param {*} sessionKey
+ * @param {*} callback
+ * @return {*}
+ */
 function postLogoutApi(sessionKey, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/user/logout",{
@@ -70,6 +94,15 @@ function postLogoutApi(sessionKey, callback) {
     })
 }
 
+/******* 
+ * @description: 注册
+ * @param {*} username
+ * @param {*} password
+ * @param {*} realName
+ * @param {*} identity
+ * @param {*} callback
+ * @return {*}
+ */
 function postRegisterApi(username, password, realName, identity, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/user/register",{

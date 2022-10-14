@@ -1,13 +1,17 @@
 ///
- // @Author: WuShaobei
  // @Date: 2022-10-10 17:36:47
- // @LastEditTime: 2022-10-13 11:39:26
- // @FilePath: /Screen-Display/v2/frontEnd/src/api/brandStatistic.js
- // @Description: 
+ // @LastEditTime: 2022-10-14 17:50:01
+ // @FilePath: /frontEnd/src/api/brandStatistic.js
+ // @Description: 火锅品牌类接口
  ///
-
+ 
  import axios from 'axios'
  
+ /******* 
+  * @description:  get "http://127.0.0.1:1432/api/data/getAllDataFromBrandStatistic" 然后转化成金字塔图并返回
+  * @param {*} callback
+  * @return {*}
+  */
  function getDataFromBrandStatisticApi(callback) {
     axios.get(
         "http://127.0.0.1:1432/api/data/getAllDataFromBrandStatistic"

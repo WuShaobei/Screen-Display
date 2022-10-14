@@ -1,12 +1,16 @@
 ///
- // @Author: WuShaobei
  // @Date: 2022-10-10 17:36:47
- // @LastEditTime: 2022-10-13 15:21:13
- // @FilePath: /Screen-Display/v2/frontEnd/src/api/fundingStatistic.js
- // @Description: 
+ // @LastEditTime: 2022-10-14 17:50:06
+ // @FilePath: /frontEnd/src/api/fundingStatistic.js
+ // @Description: 融资类接口
  ///
-// 
-
+ // 
+ 
+ /******* 
+  * @description: get "http://127.0.0.1:1432/api/data/getAllDataByFromFundingStatistic" 并返回
+  * @param {*} callback
+  * @return {*}
+  */ 
 import axios from 'axios'
 
 function getAllDataByFromFundingStatisticApi(callback) {

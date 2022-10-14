@@ -1,16 +1,20 @@
+// Package service
+// @Description: 用户类接口对应的 Service 层
 package service
 
-import "C"
 import (
 	"backEnd/manager"
 
 	"backEnd/types"
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
 )
 
+// WhoAmIService
+//
+//	@Description: 获取用户信息接口
+//	@param c
 func WhoAmIService(c *gin.Context) {
 	var request types.WhoAmIRequest
 	if err := c.ShouldBind(&request); err != nil {
@@ -20,15 +24,19 @@ func WhoAmIService(c *gin.Context) {
 
 	var userManage manager.UserManager
 	data, errNo := userManage.WhoAmI(request.Id)
-	fmt.Println(data)
+
 	if data != (types.WhoAmIData{}) {
-		data.Identity = types.GetIdentity(data.Identity)
+		data.Identity = types.GetIdentity(types.IdentityTypes(data.Identity))
 		c.JSON(200, types.WhoAmIResponse{Code: errNo, Data: data})
 	} else {
 		c.JSON(200, types.WhoAmIResponse{Code: types.UserNotExist})
 	}
 }
 
+// LoginByPasswordService
+//
+//	@Description: 通过用户名和密码登录接口
+//	@param c
 func LoginByPasswordService(c *gin.Context) {
 	var request types.LoginByPasswordRequest
 	if err := c.ShouldBind(&request); err != nil {
@@ -48,6 +56,10 @@ func LoginByPasswordService(c *gin.Context) {
 
 }
 
+// LoginBySessionKeyService
+//
+//	@Description: 通过 session 值登录接口
+//	@param c
 func LoginBySessionKeyService(c *gin.Context) {
 	var request types.LoginBySessionKeyRequest
 	if err := c.ShouldBind(&request); err != nil {
@@ -69,6 +81,10 @@ func LoginBySessionKeyService(c *gin.Context) {
 	}
 }
 
+// LogoutService
+//
+//	@Description: 登出接口
+//	@param c
 func LogoutService(c *gin.Context) {
 	var request types.LogoutRequest
 	if err := c.ShouldBind(&request); err != nil {
@@ -82,6 +98,10 @@ func LogoutService(c *gin.Context) {
 	c.JSON(200, types.LogoutResponse{Code: errNo})
 }
 
+// RegisterService
+//
+//	@Description: 用户注册接口
+//	@param c
 func RegisterService(c *gin.Context) {
 	var request types.RegisterRequest
 	if err := c.ShouldBind(&request); err != nil {

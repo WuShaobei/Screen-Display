@@ -1,17 +1,23 @@
 ///
- // @Author: WuShaobei
  // @Date: 2022-10-10 17:36:47
- // @LastEditTime: 2022-10-13 11:29:40
- // @FilePath: /Screen-Display/v2/frontEnd/src/api/statistic.js
- // @Description: 
+ // @LastEditTime: 2022-10-14 17:54:15
+ // @FilePath: /frontEnd/src/api/statistic.js
+ // @Description: 市场规模相关接口
  ///
 
  import axios from 'axios'
  
 
+ /******* 
+  * @description: post "http://127.0.0.1:1432/api/data/postAmountAndPercentageByYearFromStatistic" 并返回柱状图数据
+  * @param {*} beginYear
+  * @param {*} endYear
+  * @param {*} callback
+  * @return {*}
+  */
  function postAmountAndPercentageByYearFromStatisticApi(beginYear, endYear, callback) {
     axios.post(
-        "http://127.0.0.1:1432/api/data/postAmountAndPercentageByYearFromStatistic?", {
+        "http://127.0.0.1:1432/api/data/postAmountAndPercentageByYearFromStatistic", {
             beginYear : beginYear,
             endYear : endYear
         }

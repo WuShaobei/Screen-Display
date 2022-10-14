@@ -1,7 +1,6 @@
 <!--
- * @Author: WuShaobei
  * @Date: 2022-10-09 16:49:59
- * @LastEditTime: 2022-10-13 17:24:47
+ * @LastEditTime: 2022-10-14 16:58:26
  * @FilePath: /frontEnd/src/views/display.vue
  * @Description: 数据显示页
 -->
@@ -24,9 +23,10 @@
             <div class="statisticView"><e-charts :option="statisticOpData"/></div> 
 
 <!------------------------------------------------------------------------------>
-<!------------------------------------ 融资数据  -------------------------------->
+<!------------------------------------ 融资数据 --------------------------------->
 <!------------------------------------------------------------------------------>
             
+            <!------------------------ 融资标题 ---------------------------------->
             <div class="fundingStatisticTitle" style="display:flex; flex-direction: column; flex: 100%;" >
                 <div style="width: 100%; flex: 100%; text-align: left; color: black;" ><h3>
                     2021年-2022年预制菜行业融资情况
@@ -37,8 +37,8 @@
                     <div style="width: 20%; left: 40%; position: absolute;"><b>轮次</b></div>
                     <div style="width: 40%; left: 60%; position: absolute;"><b>投资商</b></div>
                 </div> 
-
             </div>
+            <!------------------------ 融资数据 ---------------------------------->
             <div class="fundingStatisticView">
                 <div id="scroll_in2" class="htp-list_scroll_in" style="height: 100%;overflow-y:hidden;overflow-x:hidden;display:flex; flex-direction: column; flex: 100%; ">   
                     <div v-for="data in fundingStatisticTableData"  style="width: 100%; flex: 100%;  margin-top: 2.5%; padding-bottom: 17.5%; background-color: aquamarine;">
@@ -57,23 +57,16 @@
             <div class="whoAmIView">
                     <h4>欢迎{{whoAmITableData.identity}}{{whoAmITableData.realName}}</h4>
                     用户名 : {{whoAmITableData.username}}
-                    
-
-                <!------------------------------------------------------------------------------>
-                <!------------------------------------ @todo  ---------------------------------->
-                <!------------------------------------------------------------------------------>
-                
-
             </div> 
 
 <!------------------------------------------------------------------------------>
-<!------------------------------------ 工资数据  -------------------------------->
+<!------------------------------------ 薪资数据  -------------------------------->
 <!------------------------------------------------------------------------------>
             <div class="paymentView" style="display:flex; flex-direction: column; flex: 100%;" >
-                <div class="paymentTr"  style="width: 100%; flex: 100%; text-align: left; color: black;" >
+                <div style="width: 100%; flex: 100%; text-align: left; color: black;" >
                     <h3>2018-2021 平均薪资和就业人数</h3>
                 </div>
-                <div class="paymentTr"  style="width: 100%; flex: 100%;">
+                <div style="width: 100%; flex: 100%;">
                     <div style="width: 30%; left: 0%; position: absolute;"><b>年份</b></div>
                     <div style="width: 40%; left:30%; position: absolute;"><b>平均工资</b></div>
                     <div style="width: 30%; left:70%; position: absolute;"><b>人数</b></div>
@@ -84,6 +77,7 @@
                     <div style="width: 35%; left:70%; position: absolute;">{{data.counts}}</div>
                 </div>
             </div>
+
 <!------------------------------------------------------------------------------>
 <!------------------------------------ 订单数据  -------------------------------->
 <!------------------------------------------------------------------------------> 
@@ -102,7 +96,6 @@
 </template>
 
 <script>
-
     import * as userApi from '../api/user'
     import * as brandStatisticApi from '../api/brandStatistic'
     import * as fundingStatisticApi from '../api/fundingStatistic'
@@ -113,7 +106,6 @@
     export default{
         data () {
             return {
-                // 背景
                 imgSrcBK:require('../assets/background.jpeg'),
                 id : "",
                 whoAmITableData:{},
@@ -125,6 +117,12 @@
             }
         },
         methods : {
+            /**
+             * @description: 从 cookie 中读取 session值 
+                * 若读取成功，通知后端删除对应的 session值， 同时删除 cookie 中的 session 值，然后跳转登录页
+                * 若读取失败，直接跳转登录页
+             * @return {*}
+             */            
             logout(){
                 let SessionKey = this.$cookies.get("camp-session")
                 if ( SessionKey ) {
@@ -135,7 +133,9 @@
                     path: `/`
                 })
                 alert("登出成功")
-            },            /**
+            },            
+
+            /**
              * @description: 滚动显示控制
              * @param {*} srollId
              * @return {*}
@@ -177,26 +177,33 @@
             
         },
         mounted() {
-            userApi.postWhoAmIApi(this.$route.query.id, (res) => {
-                this.whoAmITableData = res.data
+            // 获取火锅品牌数据
+            brandStatisticApi.getDataFromBrandStatisticApi((res) => {
+                this.brandStatisticOpData = res.data
             })
-            statisticApi.postAmountAndPercentageByYearFromStatisticApi(2014, 2021, (res) => {
-                // console.log("statistic : ", res)
-                this.statisticOpData = res.data
+            // 获取融资数据
+            fundingStatisticApi.getAllDataByFromFundingStatisticApi((res) =>{
+                this.fundingStatisticTableData = res.data
             })
+            // 获取网上订单数据
+            onlineOrderStatisticApi.postAmountByYearAndMonthFromOnlineOrderStatisticApi(2010, 2021, (res) => {
+                this.onlineOrderStatisticOpData = res.data
+            })
+            // 获取平均薪资和人数
             paymentApi.postAvgSalaryAndCountsByYearFromPaymentApi(2018, 2021, (res) => {
                 // console.log("payment : ", res)
                 this.paymentTableData = res.data
             })
-            brandStatisticApi.getDataFromBrandStatisticApi((res) => {
-                this.brandStatisticOpData = res.data
+            // 获取市场份额数据
+            statisticApi.postAmountAndPercentageByYearFromStatisticApi(2014, 2021, (res) => {
+                // console.log("statistic : ", res)
+                this.statisticOpData = res.data
             })
-            onlineOrderStatisticApi.postAmountByYearAndMonthFromOnlineOrderStatisticApi(2010, 2021, (res) => {
-                this.onlineOrderStatisticOpData = res.data
+            // 获取用户数据
+            userApi.postWhoAmIApi(this.$route.query.id, (res) => {
+                this.whoAmITableData = res.data
             })
-            fundingStatisticApi.getAllDataByFromFundingStatisticApi((res) =>{
-                this.fundingStatisticTableData = res.data
-            })
+            // 设置自动滚动
             this.autoSroll("scroll_in2")
         }
     }
@@ -206,47 +213,41 @@
 /* ========================================================= */
 /* =======================底层界面=========================== */
 /* ========================================================= */
+/* 总体设置 */
 .viewDisplay{
-    height: 100%;
-    width: 100%;
-    top: 0%;
-    left: 0%;
+    height: 100%; top: 0%;
+    width: 100%; left: 0%;
+    position: absolute;
 
     /* 缩放正常显示 */
     min-width: 1400px;
     min-height: 800px;
     overflow: hidden;
-
-    position: absolute;
 }
 
     /* 背景设置 */
     .background{
-        height: 100%;
-        width: 100%;
-        left: 0%;
-        right: 0%;
-        z-index: -1;
+        height: 100%; top: 0%;
+        width: 100%; left: 0%;
         position: absolute;
+        z-index: -1;
     }
 
+    /* 内容设置 */
     .content{
-        opacity: 0.85;
-        height: 100%;
-        width: 95%;
-        left: 0%;
-        right: 0%;
-        z-index: 1;
+        height: 100%; top: 0%;
+        width: 95%; left: 0%;
         position: absolute;
+        z-index: 1;
+        opacity: 0.85;
     }
         
+    /* 标题设置 */
     .title{
-        height: 100%;
-        width: 5%;
-        left: 95%;
-        right: 0%;
-        z-index: 1;
+        height: 100%; top: 0%;
+        left: 95%; width: 5%;
         position: absolute;
+        z-index: 1;
         opacity: 0.7;
         background-color: rgb(124, 94, 16);
     }
@@ -255,6 +256,9 @@
 /* ========================数据页============================ */
 /* ========================================================= */
 
+/* =============================================== */
+/* ===================火锅数据视图================== */
+/* =============================================== */
 .brandStatisticView{
     height: 100%; top: 0%;
     width: 30%; left: 0%;
@@ -262,6 +266,28 @@
     background-color: #FFFAF5;
 }
 
+/* =============================================== */
+/* ===================融资数据视图================== */
+/* =============================================== */
+/* -------------------融资标题视图------------------ */
+.fundingStatisticTitle{
+    height: 12%; top: 38%;
+    width: 30%; left: 70%;
+    position: absolute;
+    background-color: #FFE0D5;
+}
+
+/* -------------------融资数据视图------------------ */
+.fundingStatisticView{
+    height: 50%; top: 50%;
+    width: 30%; left: 70%;
+    position: absolute;
+    background-color: #FFE0D5;
+}
+
+/* =============================================== */
+/* ===================市场份额视图================== */
+/* =============================================== */
 .statisticView{
     height: 50%; top: 0%;
     width: 40%; left: 30%;
@@ -269,18 +295,10 @@
     background-color: #FFF5EF;
     
 }
-.fundingStatisticTitle{
-    height: 12%; top: 38%;
-    width: 30%; left: 70%;
-    position: absolute;
-    background-color: #FFE0D5;
-}
-.fundingStatisticView{
-    height: 50%; top: 50%;
-    width: 30%; left: 70%;
-    position: absolute;
-    background-color: #FFE0D5;
-}
+
+/* =============================================== */
+/* ===================用户数据视图================== */
+/* =============================================== */
 .whoAmIView{
     height: 12%; top: 0;
     width: 30%; left: 70%;
@@ -288,6 +306,10 @@
     background-color: #FFEAE0;
     
 }
+
+/* =============================================== */
+/* ===================薪资数据视图================== */
+/* =============================================== */
 .paymentView{
     height: 26%; top: 12%;
     width: 30%; left: 70%;
@@ -295,22 +317,31 @@
     background-color: #FFE5DA;
 }
 
+/* =============================================== */
+/* ===================订单数据视图================== */
+/* =============================================== */
 .onlineOrderStatisticView{
     height: 50%; top: 50%;
     width: 40%; left: 30%;
     position: absolute;
     background-color: #FFEFE5;
 }
+
+
+
+/* ========================================================= */
+/* ==========================其他============================ */
+/* ========================================================= */
+
+/* =============================================== */
+/* ===================滚动列表视图================== */
+/* =============================================== */
 .htp-list_scroll_in{
     height: 100%;
     width: 100%;
     top:0%;
     position: absolute;
 }
-
-/* ========================================================= */
-/* ==========================其他============================ */
-/* ========================================================= */
 
 #button{
     width: 40%;

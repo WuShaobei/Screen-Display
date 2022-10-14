@@ -1,10 +1,9 @@
-// /$$
-//  $ @Author: WuShaobei
-//  $ @Date: 2022-10-09 14:55:13
-//  $ @LastEditTime: 2022-10-09 16:45:53
-//  $ @FilePath: /Screen-Display/v2/frontEnd/config/index.js
-//  $ @Description: 修改端口
-//  $/
+///
+ // @Date: 2022-10-09 14:55:13
+ // @LastEditTime: 2022-10-14 17:56:29
+ // @FilePath: /frontEnd/config/index.js
+ // @Description: 修改端口
+ ///
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.

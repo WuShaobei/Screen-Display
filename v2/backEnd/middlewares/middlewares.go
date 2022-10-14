@@ -1,3 +1,5 @@
+// Package middlewares
+// @Description: 跨域访问管理
 package middlewares
 
 import (
@@ -10,8 +12,6 @@ import (
 //
 //	@Description: 允许跨域访问
 //	@return gin.HandlerFunc
-//	@data 2022-09-28 13:55:07
-//	@author WuShaobei
 func Cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method

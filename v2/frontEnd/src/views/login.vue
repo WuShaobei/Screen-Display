@@ -1,7 +1,6 @@
 <!--
- * @Author: WuShaobei
  * @Date: 2022-10-09 16:49:59
- * @LastEditTime: 2022-10-13 17:11:32
+ * @LastEditTime: 2022-10-14 17:58:37
  * @FilePath: /frontEnd/src/views/login.vue
  * @Description: 登录页
 -->
@@ -12,6 +11,9 @@
         </div>
 
         <div class="content">
+<!------------------------------------------------------------------------------>
+<!------------------------------------ 登录页 ----------------------------------->
+<!------------------------------------------------------------------------------>
             <div v-if="nowIs==='login'" class="dataTable" style="display:flex;flex-direction: column;">
                 <div class="tableTitle"><h1>登录页</h1></div>
                 <div class="tableTr">
@@ -31,7 +33,9 @@
                     <br />
                 </div>
             </div>
-
+<!------------------------------------------------------------------------------>
+<!------------------------------------ 注册页 ----------------------------------->
+<!------------------------------------------------------------------------------>
             <div v-if="nowIs==='register'" class="dataTable" style="display:flex;flex-direction: column;">
                 <div class="tableTitle"><h1>注册页</h1></div>
                 <div class="tableTr">
@@ -105,7 +109,7 @@
             },
 
             /**
-             * @description: 登录
+             * @description: 基础参数校验 登录
              * @return {*}
              */            
             login(){
@@ -127,7 +131,12 @@
                     }
                 )
             },
-
+            
+            /**
+             * @description: 携带用户 id 跳转到数据页
+             * @param {*} id 用户 id
+             * @return {*}
+             */            
             jumpTo( id ) {
                 this.$router.push({
                     path: `/display`,
@@ -137,6 +146,10 @@
                 })
             },
 
+            /**
+             * @description: 基础参数校验 登录 
+             * @return {*}
+             */            
             register(){
                 if ( this.username=="" ) { alert("请输入用户名"); return }
                 if ( this.username.length <  8 ||  this.username.length > 15 ){alert("请输入长度为 8 到 15 的用户名"); return }
@@ -160,6 +173,7 @@
             },
         },
         mounted() {
+            // 尝试通过 session 值登录
             let sessionKey = this.$cookies.get("camp-session")
             if (sessionKey) {
                 userApi.postLoginBySessionKeyApi(sessionKey, (res) => {
@@ -178,60 +192,49 @@
 /* ========================================================= */
 .viewLogin{
 
-    height: 100%;
-    width: 100%;
-    top: 0%;
-    left: 0%;
+    height: 100%; top: 0%;
+    width: 100%; left: 0%;
+    position: absolute;
 
     /* 缩放正常显示 */
     min-width: 1400px;
     min-height: 800px;
     overflow: hidden;
+}
 
+/* 背景设置 */
+.background{
+    height: 100%; top: 0%;
+    width: 100%; left: 0%;
+    z-index: -1;
     position: absolute;
 }
 
-    /* 背景设置 */
-    .background{
-        height: 100%;
-        width: 100%;
-        left: 0%;
-        right: 0%;
-        z-index: -1;
-        position: absolute;
-    }
+.content{
+    height: 100%; top: 0%;
+    width: 95%; left: 0%; 
+    position: absolute;
+    opacity: 0.7;
+    z-index: 1;
+}
 
-    .content{
-        opacity: 0.7;
-        height: 100%;
-        width: 95%;
-        left: 0%;
-        right: 0%;
-        z-index: 1;
-        position: absolute;
-    }
-        
-    .title{
-        height: 100%;
-        width: 5%;
-        left: 95%;
-        right: 0%;
-        z-index: 1;
-        position: absolute;
-        opacity: 0.7;
-        background-color: rgb(124, 94, 16);
-    }
+.title{
+    height: 100%; top: 0%;
+    width: 5%; left: 95%;
+    position: absolute;
+    opacity: 0.7;
+    z-index: 1;
+    background-color: rgb(124, 94, 16);
+}
 
 /* ========================================================= */
 /* ========================数据页============================ */
 /* ========================================================= */
 
 .dataTable{
-    height: auto;
-    width: auto;
+    height: auto; top: 20%;
+    width: auto; left: 60%;
     min-width: 25%;
-    top: 20%;
-    left: 60%;
     position: absolute;
     background-color: aliceblue;
 }
@@ -239,21 +242,20 @@
 .tableTitle{
     width: 100%;
 }
+
 .tableTr{
+    width: 100%;
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 100%;
     display: flex;
     flex-direction: row;
 }
 .tableTdLeft{
-    left: 0;
-    width: 40%;
+    width: 40%; left: 0;
     position: absolute;
 }
 .tableTdRight{
-    width: 60%;
-    left: 40%;
+    width: 60%; left: 40%;
     position: absolute;
 }
 

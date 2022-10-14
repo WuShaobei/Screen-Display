@@ -1,3 +1,5 @@
+// Package dao
+// @Description: 融资数据 dao 类
 package dao
 
 import "backEnd/types"
@@ -5,6 +7,12 @@ import "backEnd/types"
 type FundingStatisticDao struct {
 }
 
+// SelectAllDataFromMysql
+//
+//	@Description: 从 MySQL 中获取所有融资数据
+//	@receiver f *FundingStatisticDao
+//	@return []types.GetAllDataFromFundingStatisticData
+//	@return types.ErrNo
 func (f *FundingStatisticDao) SelectAllDataFromMysql() ([]types.GetAllDataFromFundingStatisticData, types.ErrNo) {
 
 	var allData []types.ChineseCateringFundingStatistic

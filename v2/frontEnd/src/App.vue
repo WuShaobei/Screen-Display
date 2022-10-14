@@ -1,8 +1,7 @@
 <!--
- * @Author: WuShaobei
  * @Date: 2022-10-09 14:55:13
- * @LastEditTime: 2022-10-09 17:55:58
- * @FilePath: /Screen-Display/v2/frontEnd/src/App.vue
+ * @LastEditTime: 2022-10-14 17:04:54
+ * @FilePath: /frontEnd/src/App.vue
  * @Description: 
 -->
 <template>

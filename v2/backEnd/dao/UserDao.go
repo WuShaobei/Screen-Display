@@ -1,5 +1,5 @@
 // Package dao
-// @Description: ChineseCateringUser 类 与 mysql 和 redis 交互
+// @Description: 用户管理 dao 类
 package dao
 
 import (
@@ -11,21 +11,16 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-// UserDao
-// @Description: 交互类
 type UserDao struct {
-	//user types.ChineseCateringUser
 }
 
 // SelectDataByIdFromMySQL
 //
 //	@Description: 通过 Id 从 mysql 获取用户信息
-//	@receiver u
+//	@receiver u *UserDao
 //	@param id
 //	@return types.WhoAmIData
 //	@return types.ErrNo
-//	@data 2022-10-10 09:34:00
-//	@author WuShaobei
 func (u *UserDao) SelectDataByIdFromMySQL(id string) (types.WhoAmIData, types.ErrNo) {
 
 	var user types.ChineseCateringUser
@@ -33,7 +28,7 @@ func (u *UserDao) SelectDataByIdFromMySQL(id string) (types.WhoAmIData, types.Er
 
 	if (user != types.ChineseCateringUser{}) {
 		return types.WhoAmIData{
-			Id: strconv.Itoa(int(user.Id)), Username: user.Username, RealName: user.RealName, Identity: user.Identity,
+			Id: strconv.Itoa(int(user.Id)), Username: user.Username, RealName: user.RealName, Identity: string(user.Identity),
 		}, types.OK
 	} else {
 		return types.WhoAmIData{}, types.UserNotExist
@@ -43,10 +38,8 @@ func (u *UserDao) SelectDataByIdFromMySQL(id string) (types.WhoAmIData, types.Er
 // SelectIdAndPasswordByUsernameFromMySQL
 //
 //	@Description: 通过 username 从 Mysql 读取 Id 和 password
-//	@receiver u
+//	@receiver u *UserDao
 //	@param username
-//	@data 2022-10-10 09:34:54
-//	@author WuShaobei
 func (u *UserDao) SelectIdAndPasswordByUsernameFromMySQL(username string) (
 	struct {
 		Id       string
@@ -74,15 +67,13 @@ func (u *UserDao) SelectIdAndPasswordByUsernameFromMySQL(username string) (
 // InsertUserDataToMySQL
 //
 //	@Description: 向数据库中插入用户数据并获取用户 Id
-//	@receiver u
+//	@receiver u *UserDao
 //	@param username
 //	@param password
 //	@param realName
 //	@param identity
 //	@return string
 //	@return types.ErrNo
-//	@data 2022-10-10 09:38:09
-//	@author WuShaobei
 func (u *UserDao) InsertUserDataToMySQL(username, password, realName string, identity types.IdentityTypes) (string, types.ErrNo) {
 	var user types.ChineseCateringUser
 	DB.Where("username = ?", username).Find(&user)
@@ -107,13 +98,11 @@ func (u *UserDao) InsertUserDataToMySQL(username, password, realName string, ide
 // SelectUsernameAndPasswordBySessionKeyFromRedis
 //
 //	@Description: 通过 SessionKey 从 Redis 获取用户名和密码
-//	@receiver u
+//	@receiver u *UserDao
 //	@param sessionKey
-//	@return struct{
+//	@return struct{ Username, Password string }
 //	@return Password
 //	@return types.ErrNo
-//	@data 2022-10-10 09:46:08
-//	@author WuShaobei
 func (u *UserDao) SelectUsernameAndPasswordBySessionKeyFromRedis(sessionKey string) (struct{ Username, Password string }, types.ErrNo) {
 	username, err := RDB.HGet(sessionKey, "username").Result()
 	if err != nil {
@@ -129,13 +118,11 @@ func (u *UserDao) SelectUsernameAndPasswordBySessionKeyFromRedis(sessionKey stri
 // InsertUserDataToRedis
 //
 //	@Description: 向 Redis 写入用户数据并返回 SessionKey
-//	@receiver u
+//	@receiver u struct{ Username, Password string }
 //	@param username
 //	@param password
 //	@return string
 //	@return types.ErrNo
-//	@data 2022-10-10 09:59:31
-//	@author WuShaobei
 func (u *UserDao) InsertUserDataToRedis(username, password string) (string, types.ErrNo) {
 	// 获取唯一标识符 uuid 作为该数据行的键
 	sessionKey := uuid.NewV4().String()
@@ -157,6 +144,12 @@ func (u *UserDao) InsertUserDataToRedis(username, password string) (string, type
 	}
 }
 
+// DeleteSessionKeyFromRedis
+//
+//	@Description: 删除 redis 中 session 值为 sessionKey 的数据
+//	@receiver u *UserDao
+//	@param sessionKey
+//	@return types.ErrNo
 func (u *UserDao) DeleteSessionKeyFromRedis(sessionKey string) types.ErrNo {
 	RDB.Del(sessionKey)
 	return types.OK

@@ -1,3 +1,5 @@
+// Package dao
+// @Description: 市场规模 dao 类
 package dao
 
 import (
@@ -8,9 +10,14 @@ import (
 )
 
 type StatisticDao struct {
-	//data types.ChineseCateringStatistic
 }
 
+// SelectAmountAndPercentageByYearFromMySQL
+//
+//	@Description: 从 MySQL 中通过 year 获取市场规模和百分比后写入 redis
+//	@receiver s *StatisticDao
+//	@param year
+//	@return types.ErrNo
 func (s *StatisticDao) SelectAmountAndPercentageByYearFromMySQL(year int) types.ErrNo {
 	var data types.ChineseCateringStatistic
 	DB.Where("year = ?", year).Find(&data)
@@ -24,6 +31,14 @@ func (s *StatisticDao) SelectAmountAndPercentageByYearFromMySQL(year int) types.
 	return errNo
 }
 
+// InsertAmountAndPercentageToRedis
+//
+//	@Description: 将市场规模和百分比按年份写入 Redis
+//	@receiver s *StatisticDao
+//	@param year
+//	@param amount
+//	@param percentage
+//	@return types.ErrNo
 func (s *StatisticDao) InsertAmountAndPercentageToRedis(year, amount, percentage string) types.ErrNo {
 	if err := RDB.HSet("StatisticDataIn"+year, "amount", amount).Err(); err != nil {
 		log.Fatal(err)
@@ -36,6 +51,14 @@ func (s *StatisticDao) InsertAmountAndPercentageToRedis(year, amount, percentage
 	return types.OK
 }
 
+// SelectAmountAndPercentageByYearFromRedis
+//
+//	@Description: 从 Redis 中按年份获取市场规模和百分比
+//	@receiver s *StatisticDao
+//	@param year
+//	@return string
+//	@return string
+//	@return types.ErrNo
 func (s *StatisticDao) SelectAmountAndPercentageByYearFromRedis(year string) (string, string, types.ErrNo) {
 	amount, err := RDB.HGet("StatisticDataIn"+year, "amount").Result()
 	if err != nil {

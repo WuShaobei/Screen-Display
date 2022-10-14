@@ -1,3 +1,6 @@
+// Package manager
+// @Description: 网上订单 manager 类
+
 package manager
 
 import (
@@ -10,6 +13,15 @@ type OnlineOrderStatisticManager struct {
 	onlineOrderStatisticDao dao.OnlineOrderStatisticDao
 }
 
+// PostAmountByYearAndMonthFromOnlineOrderStatistic
+//
+//	@Description: 获取网络订单量
+//	@receiver o *OnlineOrderStatisticManager
+//	@param beginYear
+//	@param endYear
+//	@return []string
+//	@return []string
+//	@return types.ErrNo
 func (o *OnlineOrderStatisticManager) PostAmountByYearAndMonthFromOnlineOrderStatistic(beginYear, endYear int) ([]string, []string, types.ErrNo) {
 	var allTime []string
 	var allAmount []string

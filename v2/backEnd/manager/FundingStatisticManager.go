@@ -1,3 +1,5 @@
+// Package manager
+// @Description: 融资数据 manager 类
 package manager
 
 import (
@@ -10,6 +12,12 @@ type FundingStatisticManager struct {
 	fundingStatisticDao dao.FundingStatisticDao
 }
 
+// GetAllDataFromFundingStatistic
+//
+//	@Description: 获取所有融资数据
+//	@receiver f *FundingStatisticManager
+//	@return []types.GetAllDataFromFundingStatisticData
+//	@return types.ErrNo
 func (f *FundingStatisticManager) GetAllDataFromFundingStatistic() ([]types.GetAllDataFromFundingStatisticData, types.ErrNo) {
 	data, errNo := f.fundingStatisticDao.SelectAllDataFromMysql()
 	if errNo != types.OK {

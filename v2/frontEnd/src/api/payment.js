@@ -1,13 +1,19 @@
 ///
- // @Author: WuShaobei
  // @Date: 2022-10-10 17:36:47
- // @LastEditTime: 2022-10-13 15:21:20
- // @FilePath: /Screen-Display/v2/frontEnd/src/api/payment.js
- // @Description: 
+ // @LastEditTime: 2022-10-14 17:50:54
+ // @FilePath: /frontEnd/src/api/payment.js
+ // @Description: 薪资类数据
  ///
 
  import axios from 'axios'
  
+ /******* 
+  * @description: post "http://127.0.0.1:1432/api/data/postAvgSalaryAndCountsByYearFromPayment" 并返回数据
+  * @param {*} beginYear
+  * @param {*} endYear
+  * @param {*} callback
+  * @return {*}
+  */ 
  function postAvgSalaryAndCountsByYearFromPaymentApi(beginYear, endYear, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/data/postAvgSalaryAndCountsByYearFromPayment", {

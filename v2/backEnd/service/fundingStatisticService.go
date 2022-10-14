@@ -1,3 +1,5 @@
+// Package service
+// @Description: 融资相关接口
 package service
 
 import (
@@ -7,6 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetAllDataByFromFundingStatisticService
+//
+//	@Description: 获取所有融资信息接口
+//	@param c
 func GetAllDataByFromFundingStatisticService(c *gin.Context) {
 
 	fundingStatisticManager := manager.FundingStatisticManager{}

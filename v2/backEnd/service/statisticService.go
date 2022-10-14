@@ -1,3 +1,5 @@
+// Package service
+// @Description: 市场规模相关接口
 package service
 
 import (
@@ -9,6 +11,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// PostAmountAndPercentageByYearFromStatisticService
+//
+//	@Description: 获取市场规模和占比接口
+//	@param c
 func PostAmountAndPercentageByYearFromStatisticService(c *gin.Context) {
 	var request types.PostAmountAndPercentageByYearFromStatisticRequest
 	if err := c.ShouldBind(&request); err != nil {

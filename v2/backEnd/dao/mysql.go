@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"backEnd/types"
 	"fmt"
 	"strings"
 	"time"
@@ -49,18 +48,4 @@ func ConnectDb() {
 	// 连接复用连接时间
 	sqlDb.SetConnMaxLifetime(time.Hour)
 	fmt.Println("Mysql Connect Success")
-}
-
-func InitUserTable() {
-	if err := DB.Exec("DROP TABLE chinese_catering_users"); err != nil {
-		fmt.Println(err)
-	}
-	if err := DB.AutoMigrate(&types.ChineseCateringUser{}); err != nil {
-		return
-	}
-
-	userDao := UserDao{}
-	_, ereNo := userDao.InsertUserDataToMySQL("administration", types.MD5("administration"), "admin", types.Admin)
-
-	fmt.Println("InitUserTable the Code is ", ereNo)
 }

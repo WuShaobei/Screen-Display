@@ -1,10 +1,5 @@
-/*
- * @Author: WuShaobei
- * @Date: 2022-10-09 21:02:22
- * @LastEditTime: 2022-10-10 08:47:59
- * @FilePath: /Screen-Display/v2/backEnd/types/User.go
- * @Description:
- */
+// Package types
+// @Description:用户相关类
 
 package types
 
@@ -27,10 +22,10 @@ type WhoAmIRequest struct {
 // WhoAmIData
 // @Description: 查看用户信息接口传递的基础数据
 type WhoAmIData struct {
-	Id       string        `json:"id"`
-	Username string        `json:"username"`
-	RealName string        `json:"realName"`
-	Identity IdentityTypes `json:"identity"`
+	Id       string `json:"id"`
+	Username string `json:"username"`
+	RealName string `json:"realName"`
+	Identity string `json:"identity"`
 }
 
 // WhoAmIResponse

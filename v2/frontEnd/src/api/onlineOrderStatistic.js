@@ -1,12 +1,18 @@
 ///
- // @Author: WuShaobei
  // @Date: 2022-10-10 17:36:47
- // @LastEditTime: 2022-10-13 15:20:58
- // @FilePath: /Screen-Display/v2/frontEnd/src/api/onlineOrderStatistic.js
- // @Description: 
+ // @LastEditTime: 2022-10-14 17:50:47
+ // @FilePath: /frontEnd/src/api/onlineOrderStatistic.js
+ // @Description: 网上订单类接口
  ///
  import axios from 'axios'
  
+ /******* 
+  * @description: post "http://127.0.0.1:1432/api/data/postAmountByYearAndMonthFromOnlineOrderStatistic" 并返回折线图数据
+  * @param {*} beginYear
+  * @param {*} endYear
+  * @param {*} callback
+  * @return {*}
+  */
  function postAmountByYearAndMonthFromOnlineOrderStatisticApi(beginYear, endYear, callback) {
     axios.post(
         "http://127.0.0.1:1432/api/data/postAmountByYearAndMonthFromOnlineOrderStatistic", {
