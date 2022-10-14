@@ -1,7 +1,25 @@
 package service
 
-import "github.com/gin-gonic/gin"
+import (
+	"backEnd/manager"
+	"backEnd/types"
 
-func GetBrandStatisticService(c *gin.Context) {
+	"github.com/gin-gonic/gin"
+)
+
+func GetAllDataFromBrandStatisticService(c *gin.Context) {
+	statisticManager := manager.BrandStatisticManager{}
+	if data, errNo := statisticManager.GetData(); errNo != types.OK {
+		c.JSON(200,
+			types.GetAllDataFromBrandStatisticResponse{
+				Code: errNo,
+			})
+	} else {
+		c.JSON(200,
+			types.GetAllDataFromBrandStatisticResponse{
+				Code: errNo,
+				Data: data,
+			})
+	}
 
 }

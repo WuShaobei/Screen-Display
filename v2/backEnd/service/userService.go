@@ -22,6 +22,7 @@ func WhoAmIService(c *gin.Context) {
 	data, errNo := userManage.WhoAmI(request.Id)
 	fmt.Println(data)
 	if data != (types.WhoAmIData{}) {
+		data.Identity = types.GetIdentity(data.Identity)
 		c.JSON(200, types.WhoAmIResponse{Code: errNo, Data: data})
 	} else {
 		c.JSON(200, types.WhoAmIResponse{Code: types.UserNotExist})
@@ -102,6 +103,6 @@ func RegisterService(c *gin.Context) {
 			},
 		)
 	} else {
-		c.JSON(200, types.RegisterResponse{Code: types.OK})
+		c.JSON(200, types.RegisterResponse{Code: errNo})
 	}
 }

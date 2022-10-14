@@ -14,13 +14,10 @@ import (
 // UserDao
 // @Description: 交互类
 type UserDao struct {
-	user types.ChineseCateringUser
-	//id       string
-	//username string
-	//password string
+	//user types.ChineseCateringUser
 }
 
-// SelectByIdFromMySQL
+// SelectDataByIdFromMySQL
 //
 //	@Description: 通过 Id 从 mysql 获取用户信息
 //	@receiver u
@@ -29,36 +26,38 @@ type UserDao struct {
 //	@return types.ErrNo
 //	@data 2022-10-10 09:34:00
 //	@author WuShaobei
-func (u *UserDao) SelectByIdFromMySQL(id string) (types.WhoAmIData, types.ErrNo) {
+func (u *UserDao) SelectDataByIdFromMySQL(id string) (types.WhoAmIData, types.ErrNo) {
 
-	DB.Where("id = ?", id).Find(&u.user)
+	var user types.ChineseCateringUser
+	DB.Where("id = ?", id).Find(&user)
 
-	if (u.user != types.ChineseCateringUser{}) {
+	if (user != types.ChineseCateringUser{}) {
 		return types.WhoAmIData{
-			Id: strconv.Itoa(int(u.user.Id)), Username: u.user.Username, RealName: u.user.RealName, Identity: u.user.Identity,
+			Id: strconv.Itoa(int(user.Id)), Username: user.Username, RealName: user.RealName, Identity: user.Identity,
 		}, types.OK
 	} else {
 		return types.WhoAmIData{}, types.UserNotExist
 	}
 }
 
-// SelectByUsernameFromMySQL
+// SelectIdAndPasswordByUsernameFromMySQL
 //
 //	@Description: 通过 username 从 Mysql 读取 Id 和 password
 //	@receiver u
 //	@param username
 //	@data 2022-10-10 09:34:54
 //	@author WuShaobei
-func (u *UserDao) SelectByUsernameFromMySQL(username string) (
+func (u *UserDao) SelectIdAndPasswordByUsernameFromMySQL(username string) (
 	struct {
 		Id       string
 		Password string
 	}, types.ErrNo,
 ) {
+	user := types.ChineseCateringUser{}
 
-	DB.Where("username = ?", username).Find(&u.user)
+	DB.Where("username = ?", username).Find(&user)
 
-	if (u.user == types.ChineseCateringUser{}) {
+	if (user == types.ChineseCateringUser{}) {
 		return struct {
 			Id       string
 			Password string
@@ -68,7 +67,7 @@ func (u *UserDao) SelectByUsernameFromMySQL(username string) (
 	return struct {
 		Id       string
 		Password string
-	}{Id: strconv.Itoa(int(u.user.Id)), Password: u.user.Password}, types.OK
+	}{Id: strconv.Itoa(int(user.Id)), Password: user.Password}, types.OK
 
 }
 
@@ -85,27 +84,27 @@ func (u *UserDao) SelectByUsernameFromMySQL(username string) (
 //	@data 2022-10-10 09:38:09
 //	@author WuShaobei
 func (u *UserDao) InsertUserDataToMySQL(username, password, realName string, identity types.IdentityTypes) (string, types.ErrNo) {
-
-	DB.Where("username = ?", username).Find(&u.user)
-	if (u.user != types.ChineseCateringUser{}) {
+	var user types.ChineseCateringUser
+	DB.Where("username = ?", username).Find(&user)
+	if (user != types.ChineseCateringUser{}) {
 		return "", types.UserHasExisted
 	}
 
-	u.user.Username = username
-	u.user.Password = types.MD5(password)
-	u.user.RealName = realName
-	u.user.Identity = identity
+	user.Username = username
+	user.Password = password
+	user.RealName = realName
+	user.Identity = identity
 
-	DB.Create(&u.user)
-	DB.Where("username = ?", username).Find(&u.user)
+	DB.Create(&user)
+	DB.Where("username = ?", username).Find(&user)
 
-	if (u.user == types.ChineseCateringUser{}) {
+	if (user == types.ChineseCateringUser{}) {
 		return "", types.UnknownError
 	}
-	return strconv.Itoa(int(u.user.Id)), types.OK
+	return strconv.Itoa(int(user.Id)), types.OK
 }
 
-// SelectBySessionKeyFromRedis
+// SelectUsernameAndPasswordBySessionKeyFromRedis
 //
 //	@Description: 通过 SessionKey 从 Redis 获取用户名和密码
 //	@receiver u
@@ -115,7 +114,7 @@ func (u *UserDao) InsertUserDataToMySQL(username, password, realName string, ide
 //	@return types.ErrNo
 //	@data 2022-10-10 09:46:08
 //	@author WuShaobei
-func (u *UserDao) SelectBySessionKeyFromRedis(sessionKey string) (struct{ Username, Password string }, types.ErrNo) {
+func (u *UserDao) SelectUsernameAndPasswordBySessionKeyFromRedis(sessionKey string) (struct{ Username, Password string }, types.ErrNo) {
 	username, err := RDB.HGet(sessionKey, "username").Result()
 	if err != nil {
 		return struct{ Username, Password string }{}, types.UserNotExist

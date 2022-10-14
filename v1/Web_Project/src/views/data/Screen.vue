@@ -1,8 +1,8 @@
 <!--
  * @Author: WuShaobei
  * @Date: 2022-09-28 09:21:46
- * @LastEditTime: 2022-09-29 14:56:41
- * @FilePath: /Web_Project/src/views/data/Screen.vue
+ * @LastEditTime: 2022-10-13 15:21:58
+ * @FilePath: /Screen-Display/v1/Web_Project/src/views/data/Screen.vue
  * @Description: 大屏显示页
 -->
 
@@ -232,7 +232,6 @@
              */            
             getChineseCateringBrandStatisticOpData(){
                 postApiSelectChineseCateringBrandStatistic((res) =>{
-                    console.log(res)
                     this.ChineseCateringBrandStatisticOpData = res.Data
                 })
                 

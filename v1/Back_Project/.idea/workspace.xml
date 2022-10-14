@@ -5,40 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4eac7947-a998-415a-b21f-c397df65c4ef" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/BrandStatisticDao.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/FundingStatisticDao.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/OnlineOrderStatisticDao.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/PaymentDao.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/StatisticDap.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/UserDao.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/mysql.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/redis.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/FundingStatisticManager.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/OnlineOrderStatisticManager.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/PaymentManager.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/StatisticManager.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/UserManager.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/middlewares/middlewares.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/router/router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/service/brandStatisticService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/service/fundingStatisticService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/service/onlineOrderStatisticService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/service/paymentByService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/service/statisticService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/service/userService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/User.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/types.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/brandStatisticService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/fundingStatisticService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/onlineOrderStatisticService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/paymentByService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/statisticService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/userService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/38672533-6c2e-4edb-834c-bc9b8dbe5421.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/38672533-6c2e-4edb-834c-bc9b8dbe5421.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/StatisticDao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/BrandStatistic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/FundingStatistic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/OnlineOrderStatistic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/Payment.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v2/backEnd/types/Statistic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/dao/PaymentDao.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/PaymentDao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/dao/StatisticDap.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/dao/UserDao.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/UserDao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/dao/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/dao/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/manager/PaymentManager.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/PaymentManager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/manager/StatisticManager.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/manager/StatisticManager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/service/paymentByService.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/service/paymentByService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/service/statisticService.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/service/statisticService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/service/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/service/userService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/types/function.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/types/function.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/backEnd/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/backEnd/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/api/brandStatisticService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/brandStatisticService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/api/fundingStatisticService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/fundingStatisticService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/api/onlineOrderStatisticService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/onlineOrderStatisticService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/api/paymentByService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/api/statisticService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/statisticService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/api/userService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/api/userService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/views/display.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/views/display.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v2/frontEnd/src/views/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../v2/frontEnd/src/views/login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

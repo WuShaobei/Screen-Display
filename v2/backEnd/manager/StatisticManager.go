@@ -1,7 +1,51 @@
 package manager
 
-import "github.com/gin-gonic/gin"
+import (
+	"backEnd/dao"
+	"backEnd/types"
+	"strconv"
+)
 
-func PostStatisticByYearService(c *gin.Context) {
+type StatisticManager struct {
+	statisticDao dao.StatisticDao
+}
 
+func (s *StatisticManager) PostAmountAndPercentageByYear(beginYear, endYear int) ([]types.PostAmountAndPercentageByYearFromStatisticData, types.ErrNo) {
+	need := endYear - beginYear + 1
+	res := make([]types.PostAmountAndPercentageByYearFromStatisticData, need)
+	have := 0
+
+	for i := 0; i < need; i++ {
+		if (res[i] != types.PostAmountAndPercentageByYearFromStatisticData{}) {
+			continue
+		}
+		amount, percentage, errNo := s.statisticDao.SelectAmountAndPercentageByYearFromRedis(strconv.Itoa(i + beginYear))
+		if errNo == types.OK {
+			res[i].Year = strconv.Itoa(i + beginYear)
+			res[i].Amount = amount
+			res[i].Percentage = percentage
+			have += 1
+		} else {
+			go s.statisticDao.SelectAmountAndPercentageByYearFromMySQL(i + beginYear)
+		}
+	}
+
+	for have < need {
+		for i := 0; i < need; i++ {
+			if (res[i] != types.PostAmountAndPercentageByYearFromStatisticData{}) {
+				continue
+			}
+			amount, percentage, errNo := s.statisticDao.SelectAmountAndPercentageByYearFromRedis(strconv.Itoa(i + beginYear))
+			if errNo == types.OK {
+				res[i].Year = strconv.Itoa(i + beginYear)
+				res[i].Amount = amount
+				res[i].Percentage = percentage
+				have += 1
+			} else {
+				continue
+			}
+		}
+	}
+
+	return res, types.OK
 }

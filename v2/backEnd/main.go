@@ -17,12 +17,13 @@ import (
 
 func main() {
 
-	//Sql
+	// 连接数据库
 	dao.ConnectDb()
-	// TODO 判断是否要重置数据表
-	//dao.InitTables()
 
-	// Redis
+	/// 重置 User 数据表
+	///dao.InitUserTable()
+
+	// 连接 Redis
 	dao.InitRedis()
 
 	// Router

@@ -44,4 +44,6 @@ func InitRedis() {
 
 	fmt.Println("open redis success")
 
+	fmt.Println("init success")
+
 }

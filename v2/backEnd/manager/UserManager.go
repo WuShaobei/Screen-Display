@@ -6,22 +6,16 @@ import (
 )
 
 type UserManager struct {
-	//id       uint
-	//username string
-	//password string
-	//realName string
-	//identity string
+	userDao dao.UserDao
 }
 
 func (u *UserManager) WhoAmI(id string) (types.WhoAmIData, types.ErrNo) {
-	userDao := dao.UserDao{}
-	return userDao.SelectByIdFromMySQL(id)
+	return u.userDao.SelectDataByIdFromMySQL(id)
 }
 
 func (u *UserManager) LoginByPassword(username, password string, setCookie bool) (types.LoginData, types.ErrNo) {
-	userDao := dao.UserDao{}
 
-	data, errNo := userDao.SelectByUsernameFromMySQL(username)
+	data, errNo := u.userDao.SelectIdAndPasswordByUsernameFromMySQL(username)
 	if errNo != types.OK {
 		return types.LoginData{}, errNo
 	}
@@ -31,7 +25,7 @@ func (u *UserManager) LoginByPassword(username, password string, setCookie bool)
 	}
 
 	if setCookie {
-		sessionKey, errNo := userDao.InsertUserDataToRedis(username, password)
+		sessionKey, errNo := u.userDao.InsertUserDataToRedis(username, password)
 		if errNo != types.OK {
 			return types.LoginData{}, errNo
 		} else {
@@ -43,15 +37,14 @@ func (u *UserManager) LoginByPassword(username, password string, setCookie bool)
 }
 
 func (u *UserManager) LoginBySessionKey(sessionKey string) (types.LoginData, types.ErrNo) {
-	userDao := dao.UserDao{}
 
-	data, errNo := userDao.SelectBySessionKeyFromRedis(sessionKey)
+	data, errNo := u.userDao.SelectUsernameAndPasswordBySessionKeyFromRedis(sessionKey)
 
 	if errNo != types.OK {
 		return types.LoginData{}, errNo
 	}
 
-	sqlData, errNo := userDao.SelectByUsernameFromMySQL(data.Username)
+	sqlData, errNo := u.userDao.SelectIdAndPasswordByUsernameFromMySQL(data.Username)
 	if errNo != types.OK {
 		return types.LoginData{}, errNo
 	}
@@ -66,11 +59,9 @@ func (u *UserManager) LoginBySessionKey(sessionKey string) (types.LoginData, typ
 }
 
 func (u *UserManager) Logout(SessionKey string) types.ErrNo {
-	userDao := dao.UserDao{}
-	return userDao.DeleteSessionKeyFromRedis(SessionKey)
+	return u.userDao.DeleteSessionKeyFromRedis(SessionKey)
 }
 
 func (u *UserManager) Register(body types.RegisterRequest) (string, types.ErrNo) {
-	userDao := dao.UserDao{}
-	return userDao.InsertUserDataToMySQL(body.Username, body.Password, body.RealName, body.Identity)
+	return u.userDao.InsertUserDataToMySQL(body.Username, body.Password, body.RealName, body.Identity)
 }
